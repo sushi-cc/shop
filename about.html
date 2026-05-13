@@ -4,89 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://i.postimg.cc/v8z6rRVj/S-443310086.jpg">
-    <title>蟹老闆｜壽司&生鮮</title>
+    <title>安織生鮮｜職人嚴選</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8f5f2; }
-        .glass { background: rgba(26, 58, 90, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .item-card:hover img { transform: scale(1.08); }
-        .active-tab { border-bottom: 2px solid #8B5E3C; color: #8B5E3C !important; }
-
-
-            /* 點擊後的顯眼樣式：變成金底黑字，像個發光的標籤 */
         .active-tab { 
-            background-color: #D4AF37 !important; /* 職人金 */
-            color: #1a3a5a !important;            /* 深藍字 */
+            background-color: #D4AF37 !important; 
+            color: #1a3a5a !important;            
             font-weight: bold;
-            border-radius: 9999px;                /* 膠囊狀 */
+            border-radius: 9999px;                
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
-        
-        /* 隱藏捲軸但保留滾動功能 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
+        .item-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
 <body class="text-[#1a3a5a]">
 
-    <!-- Header & Hero Section -->
-    <!--<header class="bg-[#1a3a5a] text-white pt-16 pb-20 px-6 text-center relative overflow-hidden">-->
-<header class="relative pt-24 pb-28 px-6 text-center overflow-hidden bg-gray-900">
-  <!-- 背景圖片層 -->
-  <img 
-    src="https://i.postimg.cc/SxjN3RKF/logofomin.jpg" 
-    alt="Brand Background" 
-    class="absolute inset-0 w-full h-full object-cover opacity-40"> <!-- 稍微提高透明度讓背景藍黑感更穩 -->
+    <header class="relative pt-24 pb-28 px-6 text-center overflow-hidden bg-gray-900">
+        <img src="https://i.postimg.cc/SxjN3RKF/logofomin.jpg" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-40">
+        <div class="relative z-10 fade-in container mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-[0.25em] mb-3 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                安織生鮮
+            </h1>
+            <p class="text-xs md:text-sm font-medium tracking-[0.3em] text-white opacity-90 mb-8">ANZHI SEAFOOD</p>
+            <div class="h-[1.5px] w-16 bg-[#D4AF37] mx-auto mb-8 shadow-lg"></div>
+            <p class="max-w-md mx-auto text-base md:text-lg leading-loose font-light text-slate-100 italic tracking-wider">
+                「尋遍山海，只為一抹鮮甜。<br>
+                <span class="text-white font-normal">將大海的饋贈完整呈獻。</span>」
+            </p>
+        </div>
+        <div class="absolute top-10 -right-5 opacity-10 text-8xl font-bold select-none text-white">FRESH</div>
+    </header>
 
-  <div class="relative z-10 fade-in container mx-auto">
-    <!-- 主標題：使用純白與細微陰影 -->
-    <h1 class="text-4xl md:text-5xl font-bold tracking-[0.25em] mb-3 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-      CC生鮮嚴選
-    </h1>
-
-    <!-- 英文標題：使用高亮珍珠白，並增加透明度區分層級 -->
-    <p class="text-xs md:text-sm font-medium tracking-[0.3em] text-white opacity-90 mb-8">
-      SEAFOOD
-    </p>
-
-    <!-- 分隔線：改成亮金色，增加職人高級感 -->
-    <div class="h-[1.5px] w-16 bg-[#D4AF37] mx-auto mb-8 shadow-lg"></div>
-
-    <!-- 文案：使用明亮的柔白色，字級稍微放大確保易讀性 -->
-    <p class="max-w-md mx-auto text-base md:text-lg leading-loose font-light text-slate-100 italic tracking-wider">
-      「尋遍山海，只為一抹鮮甜。<br>
-      <span class="text-white font-normal">將大海的饋贈完整呈獻。</span>」
-    </p>
-  </div>
-</header>
-        <!-- 裝飾背景文字 -->
-        <div class="absolute top-10 -right-5 opacity-10 text-8xl font-bold select-none">SUSHI</div>
-    
-
-  <!-- Sticky Navigation -->
-        <nav class="sticky top-0 z-50 bg-[#1a3a5a] border-b border-[#D4AF37]/20 text-white px-4 py-4 shadow-xl">
-            <div class="flex space-x-4 overflow-x-auto no-scrollbar whitespace-nowrap text-sm justify-center items-center">
-                <a href="index.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200 ">
-                    <i class="fas fa-fish mr-2"></i>蟹老闆壽司
-                </a>
-                
-                <a href="about.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200 active-tab">
-                    <i class="fas fa-shrimp mr-2"></i>CC生鮮區
-                </a>
-            </div>
-        </nav>
+    <nav class="sticky top-0 z-50 bg-[#1a3a5a] border-b border-[#D4AF37]/20 text-white px-4 py-4 shadow-xl">
+        <div class="flex space-x-4 overflow-x-auto no-scrollbar whitespace-nowrap text-sm justify-center items-center">
+            <a href="index.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200">
+                <i class="fas fa-fish mr-2"></i>蟹老闆壽司
+            </a>
+            <a href="about.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200 active-tab">
+                <i class="fas fa-shrimp mr-2"></i>安織生鮮區
+            </a>
+        </div>
+    </nav>
 
     <main class="max-w-5xl mx-auto px-4 py-10">
         <div class="flex items-center mb-8">
             <h2 class="text-xl font-bold border-l-4 border-[#D4AF37] pl-3">本週嚴選生鮮</h2>
             <span class="ml-auto text-[10px] bg-red-500 text-white px-2 py-1 rounded-full animate-pulse">限量供應</span>
         </div>
-        
         <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             </div>
     </main>
@@ -112,176 +83,107 @@
         </button>
     </div>
 
-<script>
-    // 1. 您的 Google 試算表 CSV 連結
-    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTITgLIl15r_SWgqFL4DihsAMIsMqOrZZD6l6GLgXC9orSXQEm-Dh5kHlp1Ee8ZA6FHlMUA1HCUjGII/pub?output=csv";
+    <script>
+        const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTITgLIl15r_SWgqFL4DihsAMIsMqOrZZD6l6GLgXC9orSXQEm-Dh5kHlp1Ee8ZA6FHlMUA1HCUjGII/pub?output=csv";
+        let cart = [];
 
-    let cart = [];
+        async function fetchProducts() {
+            try {
+                const response = await fetch(sheetUrl);
+                const data = await response.text();
+                const rows = data.split('\n').slice(1);
+                const products = rows.filter(row => row.trim() !== '').map((row, index) => {
+                    const cols = row.split(',');
+                    return {
+                        id: index,
+                        name: cols[0] ? cols[0].trim() : "未命名",
+                        price: cols[1] ? parseInt(cols[1]) : 0,
+                        img: cols[2] ? cols[2].trim() : "",
+                        spec: cols[3] ? cols[3].trim() : "",
+                        about: cols[4] ? cols[4].trim() : ""
+                    };
+                });
+                renderProducts(products);
+            } catch (error) {
+                console.error("資料讀取失敗:", error);
+            }
+        }
 
-    async function fetchProducts() {
-        try {
-            const response = await fetch(sheetUrl);
-            const data = await response.text();
-            
-            const rows = data.split('\n').slice(1);
-            const products = rows.filter(row => row.trim() !== '').map((row, index) => {
-                const cols = row.split(',');
-                return {
-                    id: index,
-                    name: cols[0] ? cols[0].trim() : "未命名",
-                    price: cols[1] ? parseInt(cols[1]) : 0,
-                    img: cols[2] ? cols[2].trim() : "",
-                    spec: cols[3] ? cols[3].trim() : "",
-                    about: cols[4] ? cols[4].trim() : "" // 讀取 E 欄：商品簡介
-                };
+        function renderProducts(productList) {
+            const listContainer = document.getElementById('product-list');
+            listContainer.innerHTML = ''; 
+
+            productList.forEach(p => {
+                const isInCart = cart.some(item => item.name === p.name);
+                const activeClass = isInCart ? "ring-4 ring-[#D4AF37] shadow-xl scale-[1.02] bg-amber-50" : "bg-white shadow-sm";
+
+                listContainer.innerHTML += `
+                    <div class="item-card group cursor-pointer rounded-2xl p-3 ${activeClass}" onclick="toggleCart('${p.name}', ${p.price})">
+                        <div class="relative overflow-hidden rounded-2xl aspect-square mb-3">
+                            <img src="${p.img}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/400x400?text=圖片載入中'">
+                            <div class="absolute top-3 right-3 backdrop-blur-md bg-white/90 text-[#1a3a5a] px-3 py-1.5 rounded-xl shadow-sm ring-1 ring-black/5">
+                                <div class="text-sm font-black leading-none">$${p.price}</div>
+                            </div>
+                            <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <div class="bg-white/90 text-[#1a3a5a] text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+                                    ${isInCart ? '已在購物車' : '加入購物車'}
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-base font-bold text-center text-[#1a3a5a] tracking-wide">${p.name}</h3>
+                        <p class="text-[11px] text-gray-500 text-center mt-1 font-medium tracking-wider">${p.spec}</p>
+                        <p class="text-xs text-gray-500 text-center mt-2 px-2 line-clamp-3 font-normal leading-relaxed">${p.about}</p>
+                    </div>
+                `;
             });
-
-            renderProducts(products);
-        } catch (error) {
-            console.error("資料讀取失敗:", error);
         }
-    }
 
-function renderProducts(productList) {
-    const listContainer = document.getElementById('product-list');
-    listContainer.innerHTML = ''; 
-
-    productList.forEach(p => {
-        // 檢查該商品是否已在購物車中
-        const isInCart = cart.some(item => item.name === p.name);
-        // 如果在購物車，增加一個金色邊框樣式
-        const activeClass = isInCart ? "ring-4 ring-[#D4AF37] shadow-xl scale-[1.02]" : "shadow-sm";
-
-        listContainer.innerHTML += `
-            <div class="item-card group cursor-pointer transition-all duration-300 ${activeClass}" onclick="toggleCart('${p.name}', ${p.price})">
-                </div>
-        `;
-    });
-} 
-        // 在 renderProducts 函式內，找到 HTML 模板字串
-// 將 onclick="addToCart(...)" 改為以下：
-
-        productList.forEach(p => {
-            const priceStyle = "bg-white/90 text-[#1a3a5a] ring-1 ring-black/5";
-            
-            listContainer.innerHTML += `
-                <div class="item-card group cursor-pointer" onclick="toggleCart('${p.name}', ${p.price})">
-                    </div>
-            `;
-        });
-            
-            listContainer.innerHTML += `
-                <div class="item-card group cursor-pointer" onclick="addToCart('${p.name}', ${p.price})">
-                    <div class="relative overflow-hidden rounded-2xl shadow-sm aspect-square mb-3">
-                        <img src="${p.img}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/400x400?text=圖片載入中'">
-                        <div class="absolute top-3 right-3 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-sm ${priceStyle}">
-                            <div class="text-sm font-black leading-none">$${p.price}</div>
-                        </div>
-                        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <div class="bg-white/90 text-[#1a3a5a] text-xs font-bold px-4 py-2 rounded-full shadow-lg">加入購物車</div>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-base font-bold text-center text-[#1a3a5a] tracking-wide">${p.name}</h3>
-                    
-                    <p class="text-[11px] text-gray-500 text-center mt-1 font-medium tracking-wider">
-                        ${p.spec}
-                    </p>
-                    
-                    <p class="text-xs text-gray-500 text-center mt-2 px-2 line-clamp-3 font-normal leading-relaxed">
-                        ${p.about}
-                    </p>
-                </div>
-            `;
-
-// 將原本的 addToCart 替換為此函式
-function toggleCart(name, price) {
-    const index = cart.findIndex(item => item.name === name);
-    
-    if (index > -1) {
-        // 如果商品已在購物車，則移除該項（移除一個）
-        cart.splice(index, 1);
-    } else {
-        // 如果不在購物車，則新增
-        cart.push({ name, price });
-    }
-    updateCartUI();
-}
-
-function updateCartUI() {
-    const footer = document.getElementById('cart-footer');
-    const totalEl = document.getElementById('cart-total');
-    const badgeEl = document.getElementById('cart-count-badge');
-    
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    
-    if (cart.length > 0) {
-        footer.classList.remove('hidden');
-        totalEl.innerText = total.toLocaleString();
-        badgeEl.innerText = cart.length;
-        
-        // 彈跳動畫
-        footer.classList.remove('fade-in');
-        void footer.offsetWidth; 
-        footer.classList.add('fade-in');
-    } else {
-        // 如果購物車空了，隱藏結帳列
-        footer.classList.add('hidden');
-    }
-}
-
-    // 購物車功能：累計金額與顯示
-    function addToCart(name, price) {
-        cart.push({ name, price });
-        updateCartUI();
-    }
-
-    function updateCartUI() {
-        const footer = document.getElementById('cart-footer');
-        const totalEl = document.getElementById('cart-total');
-        const badgeEl = document.getElementById('cart-count-badge');
-        
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        
-        if (cart.length > 0) {
-            footer.classList.remove('hidden');
-            totalEl.innerText = total.toLocaleString();
-            badgeEl.innerText = cart.length;
-            
-            // 觸發彈跳動畫
-            footer.classList.remove('fade-in');
-            void footer.offsetWidth; // 強制重繪
-            footer.classList.add('fade-in');
+        function toggleCart(name, price) {
+            const index = cart.findIndex(item => item.name === name);
+            if (index > -1) {
+                cart.splice(index, 1);
+            } else {
+                cart.push({ name, price });
+            }
+            updateCartUI();
+            fetchProducts(); // 重新渲染以更新金框效果
         }
-    }
 
-    // LINE 訂單發送功能
-    function sendToLine() {
-        if (cart.length === 0) return;
-        
-        let message = "【CC生鮮訂購單】\\n---\\n";
-        const summary = {};
-        
-        // 統計相同商品數量
-        cart.forEach(item => {
-            summary[item.name] = (summary[item.name] || 0) + 1;
-        });
-        
-        for (const [name, qty] of Object.entries(summary)) {
-            message += `▪️ ${name} x${qty}\\n`;
+        function updateCartUI() {
+            const footer = document.getElementById('cart-footer');
+            const totalEl = document.getElementById('cart-total');
+            const badgeEl = document.getElementById('cart-count-badge');
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            
+            if (cart.length > 0) {
+                footer.classList.remove('hidden');
+                totalEl.innerText = total.toLocaleString();
+                badgeEl.innerText = cart.length;
+                footer.classList.remove('fade-in');
+                void footer.offsetWidth; 
+                footer.classList.add('fade-in');
+            } else {
+                footer.classList.add('hidden');
+            }
         }
-        
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        message += `---\\n💰 總計金額：NT$ ${total.toLocaleString()}\\n\\n請確認訂單後回覆告知，謝謝！`;
-        
-        // 跳轉至 LINE
-        const lineUrl = `https://line.me/R/oaMessage/@aaa0770f/?${encodeURIComponent(message)}`;
-        window.location.href = lineUrl;
-    }
 
-    // 初始化：進入頁面立即執行抓取
-    fetchProducts();
-</script>
-    
+        function sendToLine() {
+            if (cart.length === 0) return;
+            let message = "【安織生鮮訂購單】\\n---\\n";
+            const summary = {};
+            cart.forEach(item => { summary[item.name] = (summary[item.name] || 0) + 1; });
+            for (const [name, qty] of Object.entries(summary)) {
+                message += `▪️ ${name} x${qty}\\n`;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            message += `---\\n💰 總計金額：NT$ ${total.toLocaleString()}\\n\\n請確認訂單後回覆告知，謝謝！`;
+            
+            // 使用您的官方 LINE ID
+            const lineUrl = `https://line.me/R/oaMessage/@aaa0770f/?${encodeURIComponent(message)}`;
+            window.location.href = lineUrl;
+        }
+
+        fetchProducts();
+    </script>
 </body>
 </html>
