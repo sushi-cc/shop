@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蟹老闆｜壽司&生鮮</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8f5f2; }
+        .glass { background: rgba(26, 58, 90, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .item-card:hover img { transform: scale(1.08); }
+        .active-tab { border-bottom: 2px solid #8B5E3C; color: #8B5E3C !important; }
+
+
+            /* 點擊後的顯眼樣式：變成金底黑字，像個發光的標籤 */
+        .active-tab { 
+            background-color: #D4AF37 !important; /* 職人金 */
+            color: #1a3a5a !important;            /* 深藍字 */
+            font-weight: bold;
+            border-radius: 9999px;                /* 膠囊狀 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 隱藏捲軸但保留滾動功能 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    </style>
+</head>
+<body class="text-[#1a3a5a]">
+
+    <!-- Header & Hero Section -->
+    <!--<header class="bg-[#1a3a5a] text-white pt-16 pb-20 px-6 text-center relative overflow-hidden">-->
+<header class="relative pt-24 pb-28 px-6 text-center overflow-hidden bg-gray-900">
+  <!-- 背景圖片層 -->
+  <img 
+    src="https://i.postimg.cc/SxjN3RKF/logofomin.jpg" 
+    alt="Brand Background" 
+    class="absolute inset-0 w-full h-full object-cover opacity-40"> <!-- 稍微提高透明度讓背景藍黑感更穩 -->
+
+  <div class="relative z-10 fade-in container mx-auto">
+    <!-- 主標題：使用純白與細微陰影 -->
+    <h1 class="text-4xl md:text-5xl font-bold tracking-[0.25em] mb-3 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+      蟹老闆｜壽司&生鮮
+    </h1>
+
+    <!-- 英文標題：使用高亮珍珠白，並增加透明度區分層級 -->
+    <p class="text-xs md:text-sm font-medium tracking-[0.3em] text-white opacity-90 mb-8">
+      SUSHI&SEAFOOD
+    </p>
+
+    <!-- 分隔線：改成亮金色，增加職人高級感 -->
+    <div class="h-[1.5px] w-16 bg-[#D4AF37] mx-auto mb-8 shadow-lg"></div>
+
+    <!-- 文案：使用明亮的柔白色，字級稍微放大確保易讀性 -->
+    <p class="max-w-md mx-auto text-base md:text-lg leading-loose font-light text-slate-100 italic tracking-wider">
+      「一貫入魂，職人手作的溫度，<br>
+      <span class="text-white font-normal">在舌尖綻放最純粹的旬味。</span>」
+    </p>
+  </div>
+</header>
+        <!-- 裝飾背景文字 -->
+        <div class="absolute top-10 -right-5 opacity-10 text-8xl font-bold select-none">SUSHI</div>
+    
+
+  <!-- Sticky Navigation -->
+        <nav class="sticky top-0 z-50 bg-[#1a3a5a] border-b border-[#D4AF37]/20 text-white px-4 py-4 shadow-xl">
+            <div class="flex space-x-4 overflow-x-auto no-scrollbar whitespace-nowrap text-sm justify-center items-center">
+                <a href="index11.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200 active-tab">
+                    <i class="fas fa-fish mr-2"></i>蟹老闆壽司
+                </a>
+                
+                <a href="index55.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200 ">
+                    <i class="fas fa-shrimp mr-2"></i>生鮮區
+                </a>
+            </div>
+        </nav>
+    <!-- Menu Grid -->
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        
+        <!-- Category: 握壽司 -->
+        <section id="nigiri" class="mb-16 fade-in">
+            <div class="flex items-center mb-8">
+                <h2 class="text-xl font-bold border-l-4 border-[#8B5E3C] pl-3">經典握壽司</h2>
+                <span class="ml-auto text-xs text-gray-400 font-light">買十送一</span>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+                <!-- 品項卡片 (重複此結構 34 次) -->
+                <script>
+                    const products = [
+                        { name: "茶碗蒸", price: "30", img: "https://i.postimg.cc/4NKV0yk4/cha-wan-zheng.jpg" },
+                        { name: "炙燒鮭魚", price: "15", img: "https://i.postimg.cc/QdnNV2XC/zhi-shao-gui-yu.jpg" },
+                        { name: "櫻桃鴨", price: "12", img: "https://i.postimg.cc/sXBCqxSt/S-443277316-0.jpg" },
+                        { name: "檸檬黃魚", price: "12", img: "https://i.postimg.cc/26qNMyvg/S-443277315-0.jpg" },
+                        { name: "烤秋刀魚", price: "12", img: "https://i.postimg.cc/qvZBgPk3/kao-qiu-dao-yu.jpg" },
+                        { name: "黑胡椒牛", price: "12", img: "https://i.postimg.cc/PJxTtyBD/S-443269179-0.jpg" },
+                        { name: "醬燒鰻魚", price: "12", img: "https://i.postimg.cc/QCthXmRW/S-443269180-0.jpg" },
+                        { name: "鮮蝦", price: "12", img: "https://i.postimg.cc/CMJ3FjMN/xian-xia.jpg" },
+                        { name: "花捲壽司", price: "12", img: "https://i.postimg.cc/rsHWmX4f/hua-juan-shou-si.jpg" },
+                        { name: "煙燻花枝", price: "12", img: "https://i.postimg.cc/qvF3KyNv/bao-yu-pian.png" },
+                        { name: "浦燒鰻魚", price: "12", img: "https://i.postimg.cc/jSkqCpsC/pu-shao-man-yu.jpg" },
+                        { name: "鮑魚片", price: "12", img: "https://i.postimg.cc/YC0FjbC7/bao-yu-pian-(1).png" },
+                        { name: "大章魚", price: "12", img: "https://i.postimg.cc/mkDBbj0c/S-443269181-0.jpg" },
+                        { name: "白米稻荷", price: "12", img: "https://i.postimg.cc/4xF4nDJx/bai-mi-dao-he.jpg" },
+                        { name: "起司火腿", price: "12", img: "https://i.postimg.cc/595LrXRr/qi-si-huo-tui.png" },
+                        { name: "魚蛋沙拉", price: "12", img: "https://i.postimg.cc/9Xgy1TkG/zha-yu-dan.jpg" },
+                        { name: "起司德式香腸", price: "12", img: "https://i.postimg.cc/FFb36YBq/qi-si-de-shi-xiang-chang.png" },
+                        { name: "海帶芽", price: "12", img: "https://i.postimg.cc/QxR1ZDhL/hai-dai-ya.jpg" },
+                        { name: "蟹味棒", price: "12", img: "https://i.postimg.cc/3wDDFNG1/xie-wei-bang.png" },
+                        { name: "玉子燒", price: "12", img: "https://i.postimg.cc/kghMD0n2/yu-zi-shao.jpg" },
+                        { name: "香酥肉鬆", price: "12", img: "https://i.postimg.cc/J49ZC8MR/xiang-su-rou-song.jpg" },
+                        { name: "黃金玉米", price: "12", img: "https://i.postimg.cc/y8c9VG8P/huang-jin-yu-mi.jpg" },
+                        { name: "鮮甜鮪魚", price: "12", img: "https://i.postimg.cc/W47kZJrN/wei-yu-sha-la.jpg" },
+                        { name: "鳳梨蝦球", price: "12", img: "https://i.postimg.cc/NjFXLpfn/feng-li-xia-qiu.png" },
+                        { name: "櫻花蝦", price: "12", img: "https://i.postimg.cc/cJcn38Y8/ying-hua-xia.jpg" },
+                        { name: "鮑魚沙拉", price: "12", img: "https://i.postimg.cc/d0FCD97P/bao-yu-sha-la.jpg" },
+                        { name: "龍蝦沙拉", price: "12", img: "https://i.postimg.cc/g0KZh6Rm/long-xia-sha-la.jpg" },
+                        { name: "海瓜子", price: "12", img: "https://i.postimg.cc/jSvrpxr2/hai-gua-zi.jpg" },
+                        { name: "辣味螺肉", price: "12", img: "https://i.postimg.cc/MGwBXYng/la-wei-luo-rou.jpg" },
+                        { name: "蟹味沙拉", price: "12", img: "https://i.postimg.cc/SsnMJLF4/xie-wei-sha-la.jpg" },
+                        { name: "蝦卵", price: "12", img: "https://i.postimg.cc/Dfp15sNL/zhen-luan.jpg" },
+                        { name: "紅魚卵", price: "12", img: "https://i.postimg.cc/NGCRbTnN/hong-luan.jpg" },
+                        { name: "台式泡菜", price: "12", img: "https://i.postimg.cc/ZYs6j3Q6/pao-cai-hua-zhi.jpg" },
+                        { name: "辣干貝唇", price: "12", img: "https://i.postimg.cc/qvynkFvP/la-gan-bei-chun.jpg" },
+                        
+                        
+                        // ... 更多品項
+                    ];
+
+                    // 這裡優化生成 33 個品項的樣式
+                   for (let i = 0; i < 33; i++) {
+                        const p = products[i % products.length];
+                        
+                        // 定義三種價格的樣式變數
+                        let priceStyle = "";
+                        let label = "";
+
+                        if (p.price === "30") {
+                            // 30元：職人深藍
+                            priceStyle = "bg-[#1a3a5a] text-white ring-blue-400/30";
+                            label = "PREMIUM";
+                        } else if (p.price === "15") {
+                            // 15元：人氣琥珀金
+                            priceStyle = "bg-[#D4AF37] text-white ring-amber-200/50";
+                            label = "POPULAR";
+                        } else {
+                            // 12元與其他：經典簡約白
+                            priceStyle = "bg-white/95 text-[#1a3a5a] ring-black/10";
+                            label = "CLASSIC";
+                        }
+
+                        document.write(`
+                            <div class="item-card group cursor-pointer">
+                                <div class="relative overflow-hidden rounded-xl shadow-md aspect-square mb-4">
+                                    <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-500">
+                                    
+                                    <div class="absolute top-2 right-2 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-md ring-1 ${priceStyle} transition-all">
+                                        <div class="text-xs font-black leading-none">$${p.price}</div>
+                                        <div class="text-[7px] font-bold mt-0.5 opacity-80 tracking-tighter text-center">${label}</div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-base md:text-lg font-bold text-center text-[#1a3a5a] group-hover:text-[#8B5E3C] transition-colors tracking-wide">
+                                    ${p.name}
+                                </h3>
+                            </div>
+                        `);
+                    }
+                    
+                </script>
+                    <script>
+                        const navLinks = document.querySelectorAll('nav a');
+
+                        navLinks.forEach(link => {
+                            link.addEventListener('click', function() {
+                                // 1. 移除所有人身上的金色背景
+                                navLinks.forEach(l => l.classList.remove('active-tab'));
+                                // 2. 幫點擊的那個人加上金色背景
+                                this.classList.add('active-tab');
+                            });
+                        });
+                    </script>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 px-6 border-t border-gray-100 text-center">
+        <p class="text-xs text-gray-400 tracking-widest mb-4">© 2026 安織生鮮 AN ORI SEAFOOD</p>
+        <div class="flex justify-center space-x-4">
+            <a href="#" class="w-8 h-8 rounded-full bg-[#1a3a5a] text-white flex items-center justify-center text-xs"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-[#1a3a5a] text-white flex items-center justify-center text-xs"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button (LINE) -->
+    <a href="https://line.me" target="_blank" class="fixed bottom-6 right-6 z-[60] bg-[#06C755] text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-transform active:scale-95">
+        <i class="fab fa-line"></i>
+        <span class="absolute -top-1 -left-1 flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+        </span>
+    </a>
+
+</body>
+</html>

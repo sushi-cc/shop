@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安織生鮮｜後台管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-lg mx-auto bg-white rounded-2xl shadow-xl p-8">
+        <h1 class="text-2xl font-bold text-[#1a3a5a] mb-6 text-center">新增生鮮商品</h1>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">商品名稱</label>
+                <input type="text" id="p-name" placeholder="例如：日本大干貝" class="w-full p-3 border rounded-xl mt-1">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">價格 (數字)</label>
+                <input type="number" id="p-price" placeholder="例如：880" class="w-full p-3 border rounded-xl mt-1">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">圖片網址 (可用 PostIMG 上傳後貼入)</label>
+                <input type="text" id="p-img" placeholder="https://i.postimg.cc/..." class="w-full p-3 border rounded-xl mt-1">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">等級標籤</label>
+                <select id="p-label" class="w-full p-3 border rounded-xl mt-1">
+                    <option value="CLASSIC">CLASSIC (一般)</option>
+                    <option value="POPULAR">POPULAR (熱門)</option>
+                    <option value="PREMIUM">PREMIUM (頂級)</option>
+                </select>
+            </div>
+            <button onclick="generateData()" class="w-full bg-[#1a3a5a] text-white py-4 rounded-xl font-bold mt-6 shadow-lg active:scale-95 transition-all">
+                生成商品代碼
+            </button>
+        </div>
+
+        <div id="result-area" class="mt-8 hidden">
+            <p class="text-sm text-red-500 mb-2 font-bold">請複製下方代碼並貼入 index55.html 的 products 陣列中：</p>
+            <textarea id="output-code" class="w-full h-32 p-4 bg-gray-900 text-green-400 font-mono text-xs rounded-xl" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        function generateData() {
+            const name = document.getElementById('p-name').value;
+            const price = document.getElementById('p-price').value;
+            const img = document.getElementById('p-img').value;
+            const label = document.getElementById('p-label').value;
+
+            if(!name || !price || !img) { alert('請填寫完整資訊！'); return; }
+
+            const code = `{ name: "${name}", price: ${price}, img: "${img}", label: "${label}" },`;
+            document.getElementById('output-code').value = code;
+            document.getElementById('result-area').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
