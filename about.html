@@ -60,7 +60,7 @@
     <!-- 文案：使用明亮的柔白色，字級稍微放大確保易讀性 -->
     <p class="max-w-md mx-auto text-base md:text-lg leading-loose font-light text-slate-100 italic tracking-wider">
       「尋遍山海，只為一抹鮮甜。<br>
-      <span class="text-white font-normal">職人眼中的極致旬味，將大海的饋贈完整呈獻。</span>」
+      <span class="text-white font-normal">將大海的饋贈完整呈獻。</span>」
     </p>
   </div>
 </header>
@@ -275,7 +275,7 @@ function updateCartUI() {
         message += `---\\n💰 總計金額：NT$ ${total.toLocaleString()}\\n\\n請確認訂單後回覆告知，謝謝！`;
         
         // 跳轉至 LINE
-        const lineUrl = `https://line.me/@aaa0770f/msg/text/?${encodeURIComponent(message)}`;
+        const lineUrl = `https://line.me/R/oaMessage/@aaa0770f/?${encodeURIComponent(message)}`;
         window.location.href = lineUrl;
     }
 
