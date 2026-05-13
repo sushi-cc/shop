@@ -46,7 +46,7 @@
   <div class="relative z-10 fade-in container mx-auto">
     <!-- 主標題：使用純白與細微陰影 -->
     <h1 class="text-4xl md:text-5xl font-bold tracking-[0.25em] mb-3 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-      嚴選生鮮
+      CC生鮮嚴選
     </h1>
 
     <!-- 英文標題：使用高亮珍珠白，並增加透明度區分層級 -->
@@ -60,7 +60,7 @@
     <!-- 文案：使用明亮的柔白色，字級稍微放大確保易讀性 -->
     <p class="max-w-md mx-auto text-base md:text-lg leading-loose font-light text-slate-100 italic tracking-wider">
       「尋遍山海，只為一抹鮮甜。<br>
-      <span class="text-white font-normal">嚴選職人眼中的極致旬味，將大海的饋贈完整呈獻。</span>」
+      <span class="text-white font-normal">職人眼中的極致旬味，將大海的饋贈完整呈獻。</span>」
     </p>
   </div>
 </header>
@@ -76,7 +76,7 @@
                 </a>
                 
                 <a href="about.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200 active-tab">
-                    <i class="fas fa-shrimp mr-2"></i>生鮮區
+                    <i class="fas fa-shrimp mr-2"></i>CC生鮮區
                 </a>
             </div>
         </nav>
@@ -275,7 +275,7 @@ function updateCartUI() {
         message += `---\\n💰 總計金額：NT$ ${total.toLocaleString()}\\n\\n請確認訂單後回覆告知，謝謝！`;
         
         // 跳轉至 LINE
-        const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+        const lineUrl = `https://line.me/@aaa0770f/msg/text/?${encodeURIComponent(message)}`;
         window.location.href = lineUrl;
     }
 
