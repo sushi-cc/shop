@@ -30,7 +30,7 @@
         <img src="https://i.postimg.cc/SxjN3RKF/logofomin.jpg" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-40">
         <div class="relative z-10 fade-in container mx-auto">
             <h1 class="text-4xl md:text-5xl font-bold tracking-[0.25em] mb-3 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-                安織生鮮
+                CC生鮮
             </h1>
             <p class="text-xs md:text-sm font-medium tracking-[0.3em] text-white opacity-90 mb-8">ANZHI SEAFOOD</p>
             <div class="h-[1.5px] w-16 bg-[#D4AF37] mx-auto mb-8 shadow-lg"></div>
@@ -48,7 +48,7 @@
                 <i class="fas fa-fish mr-2"></i>蟹老闆壽司
             </a>
             <a href="about.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200 active-tab">
-                <i class="fas fa-shrimp mr-2"></i>安織生鮮區
+                <i class="fas fa-shrimp mr-2"></i>CC生鮮區
             </a>
         </div>
     </nav>
@@ -169,7 +169,7 @@
 
         function sendToLine() {
             if (cart.length === 0) return;
-            let message = "【安織生鮮訂購單】\\n---\\n";
+            let message = "【CC生鮮訂購單】\\n---\\n";
             const summary = {};
             cart.forEach(item => { summary[item.name] = (summary[item.name] || 0) + 1; });
             for (const [name, qty] of Object.entries(summary)) {
