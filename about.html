@@ -112,72 +112,82 @@
     </div>
 
 <script>
-    // 1. 設定 Google 試算表 CSV 連結
-    // 請確保連結結尾是 output=csv
+    // 1. 您的 Google 試算表 CSV 連結
     const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTITgLIl15r_SWgqFL4DihsAMIsMqOrZZD6l6GLgXC9orSXQEm-Dh5kHlp1Ee8ZA6FHlMUA1HCUjGII/pub?output=csv";
 
     let cart = [];
 
-    // 自動從 Google 試算表抓取資料的函式
     async function fetchProducts() {
         try {
             const response = await fetch(sheetUrl);
             const data = await response.text();
             
-            // 將 CSV 文字轉換為 JavaScript 陣列 (排除第一列標題列)
             const rows = data.split('\n').slice(1);
             const products = rows.filter(row => row.trim() !== '').map((row, index) => {
                 const cols = row.split(',');
                 return {
                     id: index,
-                    name: cols[0] ? cols[0].trim() : "未命名商品", // A 欄：名稱
-                    price: cols[1] ? parseInt(cols[1]) : 0,        // B 欄：價格
-                    img: cols[2] ? cols[2].trim() : "",            // C 欄：圖片網址
-                    spec: cols[3] ? cols[3].trim() : ""            // D 欄：商品規格
+                    name: cols[0] ? cols[0].trim() : "未命名",
+                    price: cols[1] ? parseInt(cols[1]) : 0,
+                    img: cols[2] ? cols[2].trim() : "",
+                    spec: cols[3] ? cols[3].trim() : "",
+                    about: cols[4] ? cols[4].trim() : "" // 讀取 E 欄：商品簡介
                 };
             });
 
             renderProducts(products);
         } catch (error) {
-            console.error("資料讀取失敗，請檢查試算表是否已發佈到網路且格式為 CSV:", error);
+            console.error("資料讀取失敗:", error);
         }
     }
 
-    // 渲染商品到畫面上的函式
     function renderProducts(productList) {
         const listContainer = document.getElementById('product-list');
-        if (!listContainer) return;
-        
-        listContainer.innerHTML = ''; // 清空原本的手動數據
+        listContainer.innerHTML = ''; 
 
         productList.forEach(p => {
-            // 使用乾淨的白色半透明背景顯示價格
             const priceStyle = "bg-white/90 text-[#1a3a5a] ring-1 ring-black/5";
             
             listContainer.innerHTML += `
                 <div class="item-card group cursor-pointer" onclick="addToCart('${p.name}', ${p.price})">
                     <div class="relative overflow-hidden rounded-2xl shadow-sm aspect-square mb-3">
-                        <img src="${p.img}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/400x400?text=圖片路徑錯誤'">
-                        
+                        <img src="${p.img}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/400x400?text=圖片載入中'">
                         <div class="absolute top-3 right-3 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-sm ${priceStyle}">
                             <div class="text-sm font-black leading-none">$${p.price}</div>
                         </div>
-                        
                         <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <div class="bg-white/90 text-[#1a3a5a] text-xs font-bold px-4 py-2 rounded-full shadow-lg">加入購物車</div>
                         </div>
                     </div>
                     
-                    <h3 class="text-base font-bold text-center text-[#1a3a5a] group-hover:text-[#D4AF37] transition-colors tracking-wide">
-                        ${p.name}
-                    </h3>
+                    <h3 class="text-base font-bold text-center text-[#1a3a5a] tracking-wide">${p.name}</h3>
                     
-                    <p class="text-[11px] text-gray-500 text-center mt-1 font-light tracking-wider italic">
+                    <p class="text-[11px] text-gray-500 text-center mt-1 font-medium tracking-wider">
                         ${p.spec}
+                    </p>
+                    
+                    <p class="text-[10px] text-gray-400 text-center mt-2 px-2 line-clamp-2 font-light leading-relaxed">
+                        ${p.about}
                     </p>
                 </div>
             `;
         });
+    }
+
+    // 購物車功能保持不變
+    function addToCart(name, price) {
+        cart.push({ name, price });
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const footer = document.getElementById('cart-footer');
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        document.getElementById('cart-total').innerText = total.toLocaleString();
+        document.getElementById('cart-count-badge').innerText = cart.length;
+        if (cart.length > 0) {
+            footer.classList.remove('hidden');
+        }
     }
 
     // 購物車功能：累計金額與顯示
@@ -209,7 +219,7 @@
     function sendToLine() {
         if (cart.length === 0) return;
         
-        let message = "【安織生鮮訂購單】\\n---\\n";
+        let message = "【CC生鮮訂購單】\\n---\\n";
         const summary = {};
         
         // 統計相同商品數量
