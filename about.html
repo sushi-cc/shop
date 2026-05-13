@@ -142,12 +142,33 @@
         }
     }
 
-    function renderProducts(productList) {
-        const listContainer = document.getElementById('product-list');
-        listContainer.innerHTML = ''; 
+function renderProducts(productList) {
+    const listContainer = document.getElementById('product-list');
+    listContainer.innerHTML = ''; 
+
+    productList.forEach(p => {
+        // 檢查該商品是否已在購物車中
+        const isInCart = cart.some(item => item.name === p.name);
+        // 如果在購物車，增加一個金色邊框樣式
+        const activeClass = isInCart ? "ring-4 ring-[#D4AF37] shadow-xl scale-[1.02]" : "shadow-sm";
+
+        listContainer.innerHTML += `
+            <div class="item-card group cursor-pointer transition-all duration-300 ${activeClass}" onclick="toggleCart('${p.name}', ${p.price})">
+                </div>
+        `;
+    });
+} 
+        // 在 renderProducts 函式內，找到 HTML 模板字串
+// 將 onclick="addToCart(...)" 改為以下：
 
         productList.forEach(p => {
             const priceStyle = "bg-white/90 text-[#1a3a5a] ring-1 ring-black/5";
+            
+            listContainer.innerHTML += `
+                <div class="item-card group cursor-pointer" onclick="toggleCart('${p.name}', ${p.price})">
+                    </div>
+            `;
+        });
             
             listContainer.innerHTML += `
                 <div class="item-card group cursor-pointer" onclick="addToCart('${p.name}', ${p.price})">
@@ -172,24 +193,42 @@
                     </p>
                 </div>
             `;
-        });
-    }
 
-    // 購物車功能保持不變
-    function addToCart(name, price) {
+// 將原本的 addToCart 替換為此函式
+function toggleCart(name, price) {
+    const index = cart.findIndex(item => item.name === name);
+    
+    if (index > -1) {
+        // 如果商品已在購物車，則移除該項（移除一個）
+        cart.splice(index, 1);
+    } else {
+        // 如果不在購物車，則新增
         cart.push({ name, price });
-        updateCartUI();
     }
+    updateCartUI();
+}
 
-    function updateCartUI() {
-        const footer = document.getElementById('cart-footer');
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        document.getElementById('cart-total').innerText = total.toLocaleString();
-        document.getElementById('cart-count-badge').innerText = cart.length;
-        if (cart.length > 0) {
-            footer.classList.remove('hidden');
-        }
+function updateCartUI() {
+    const footer = document.getElementById('cart-footer');
+    const totalEl = document.getElementById('cart-total');
+    const badgeEl = document.getElementById('cart-count-badge');
+    
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    
+    if (cart.length > 0) {
+        footer.classList.remove('hidden');
+        totalEl.innerText = total.toLocaleString();
+        badgeEl.innerText = cart.length;
+        
+        // 彈跳動畫
+        footer.classList.remove('fade-in');
+        void footer.offsetWidth; 
+        footer.classList.add('fade-in');
+    } else {
+        // 如果購物車空了，隱藏結帳列
+        footer.classList.add('hidden');
     }
+}
 
     // 購物車功能：累計金額與顯示
     function addToCart(name, price) {
