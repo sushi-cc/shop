@@ -109,20 +109,19 @@
             }
         }
 
-        function renderProducts(productList) {
+function renderProducts(productList) {
     const listContainer = document.getElementById('product-list');
     listContainer.innerHTML = ''; 
 
     productList.forEach(p => {
-        // 查找該品項在購物車中的數量
         const cartItem = cart.find(item => item.name === p.name);
         const quantity = cartItem ? cartItem.quantity : 0;
         const activeClass = quantity > 0 ? "ring-2 ring-[#D4AF37] bg-amber-50" : "bg-white shadow-sm";
 
         listContainer.innerHTML += `
-            <div class="item-card group rounded-2xl p-3 ${activeClass} transition-all">
+            <div class="item-card group rounded-2xl p-3 ${activeClass} transition-all flex flex-col h-full">
                 <div class="relative overflow-hidden rounded-2xl aspect-square mb-3">
-                    <img src="${p.img}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400?text=圖片載入中'">
+                    <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x400?text=圖片載入中'">
                     <div class="absolute top-3 right-3 backdrop-blur-md bg-white/90 text-[#1a3a5a] px-3 py-1.5 rounded-xl shadow-sm ring-1 ring-black/5">
                         <div class="text-sm font-black leading-none">$${p.price}</div>
                     </div>
@@ -130,6 +129,12 @@
                 
                 <h3 class="text-base font-bold text-center text-[#1a3a5a] tracking-wide truncate">${p.name}</h3>
                 <p class="text-[11px] text-gray-500 text-center mt-1 font-medium truncate">${p.spec}</p>
+                
+                <div class="mt-2 mb-auto px-1">
+                    <p class="text-[10px] text-gray-400 text-center leading-relaxed line-clamp-2 italic">
+                        ${p.about ? '「' + p.about + '」' : ''}
+                    </p>
+                </div>
                 
                 <div class="mt-4 flex items-center justify-between bg-gray-100 rounded-xl p-1">
                     <button onclick="updateQuantity('${p.name}', ${p.price}, -1)" 
