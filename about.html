@@ -24,33 +24,6 @@
         .item-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
-<div id="cart-modal" class="fixed inset-0 z-[70] hidden">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleCartModal()"></div>
-    
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-3xl p-6 shadow-2xl transition-transform duration-300">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-bold text-[#1a3a5a]">確認訂購內容</h3>
-            <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-        </div>
-        
-        <div id="cart-items-list" class="max-h-[60vh] overflow-y-auto space-y-4 mb-6 no-scrollbar">
-            </div>
-
-        <div class="border-t border-gray-100 pt-4 mb-6">
-            <div class="flex justify-between items-center">
-                <span class="text-gray-500">總計金額</span>
-                <span class="text-2xl font-black text-[#1a3a5a]">$ <span id="modal-total">0</span></span>
-            </div>
-        </div>
-
-        <button onclick="sendToLine()" class="w-full bg-[#06C755] text-white py-4 rounded-2xl font-bold flex items-center justify-center space-x-2 shadow-lg active:scale-95 transition-all">
-            <i class="fab fa-line text-2xl"></i>
-            <span>確認訂單並發送</span>
-        </button>
-    </div>
-</div>
 <body class="text-[#1a3a5a]">
 
     <header class="relative pt-24 pb-28 px-6 text-center overflow-hidden bg-gray-900">
@@ -85,7 +58,7 @@
             <h2 class="text-xl font-bold border-l-4 border-[#D4AF37] pl-3">本週嚴選生鮮</h2>
             <span class="ml-auto text-[10px] bg-red-500 text-white px-2 py-1 rounded-full animate-pulse">限量供應</span>
         </div>
-        <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20">
             </div>
     </main>
 
@@ -93,23 +66,51 @@
         © 2026 蟹老闆 SUSHI | 生鮮團購 FRESH FOOD
     </footer>
 
-        <div id="cart-footer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md bg-[#1a3a5a] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 hidden fade-in">
-            <div class="flex items-center space-x-3">
-                <div class="relative">
-                    <i class="fas fa-shopping-basket text-2xl text-[#D4AF37]"></i>
-                    <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#1a3a5a]">0</span>
-                </div>
-                <div>
-                    <p class="text-[10px] opacity-60">目前預算累計</p>
-                    <p class="text-lg font-black">$ <span id="cart-total">0</span></p>
-                </div>
+    <div id="cart-footer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md bg-[#1a3a5a] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 hidden fade-in">
+        <div class="flex items-center space-x-3">
+            <div class="relative">
+                <i class="fas fa-shopping-basket text-2xl text-[#D4AF37]"></i>
+                <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#1a3a5a]">0</span>
+            </div>
+            <div>
+                <p class="text-[10px] opacity-60">目前預算累計</p>
+                <p class="text-lg font-black">$ <span id="cart-total">0</span></p>
+            </div>
+        </div>
+        
+        <button onclick="toggleCartModal()" class="bg-[#D4AF37] text-[#1a3a5a] px-6 py-2 rounded-xl font-bold flex items-center space-x-2 transition-all active:scale-95">
+            <i class="fas fa-list-ul mr-1"></i>
+            <span>查看清單</span>
+        </button>
+    </div>
+
+    <div id="cart-modal" class="fixed inset-0 z-[70] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleCartModal()"></div>
+        
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-3xl p-6 shadow-2xl transition-transform duration-300">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-[#1a3a5a]">確認訂購內容</h3>
+                <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
             </div>
             
-            <button onclick="toggleCartModal()" class="bg-[#D4AF37] text-[#1a3a5a] px-6 py-2 rounded-xl font-bold flex items-center space-x-2 transition-all active:scale-95">
-                <i class="fas fa-list-ul mr-1"></i>
-                <span>查看清單</span>
+            <div id="cart-items-list" class="max-h-[60vh] overflow-y-auto space-y-4 mb-6 no-scrollbar">
+                </div>
+
+            <div class="border-t border-gray-100 pt-4 mb-6">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500 text-sm">總計金額</span>
+                    <span class="text-2xl font-black text-[#1a3a5a]">$ <span id="modal-total">0</span></span>
+                </div>
+            </div>
+
+            <button onclick="sendToLine()" class="w-full bg-[#06C755] text-white py-4 rounded-2xl font-bold flex items-center justify-center space-x-2 shadow-lg active:scale-95 transition-all">
+                <i class="fab fa-line text-2xl"></i>
+                <span>確認訂單並發送</span>
             </button>
         </div>
+    </div>
 
     <script>
         const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTITgLIl15r_SWgqFL4DihsAMIsMqOrZZD6l6GLgXC9orSXQEm-Dh5kHlp1Ee8ZA6FHlMUA1HCUjGII/pub?output=csv";
@@ -137,163 +138,131 @@
             }
         }
 
-function renderProducts(productList) {
-    const listContainer = document.getElementById('product-list');
-    listContainer.innerHTML = ''; 
+        function renderProducts(productList) {
+            const listContainer = document.getElementById('product-list');
+            listContainer.innerHTML = ''; 
 
-    productList.forEach(p => {
-        const cartItem = cart.find(item => item.name === p.name);
-        const quantity = cartItem ? cartItem.quantity : 0;
-        const activeClass = quantity > 0 ? "ring-2 ring-[#D4AF37] bg-amber-50" : "bg-white shadow-sm";
+            productList.forEach(p => {
+                const cartItem = cart.find(item => item.name === p.name);
+                const quantity = cartItem ? cartItem.quantity : 0;
+                const activeClass = quantity > 0 ? "ring-2 ring-[#D4AF37] bg-amber-50" : "bg-white shadow-sm";
 
-        listContainer.innerHTML += `
-            <div class="item-card group rounded-2xl p-3 ${activeClass} transition-all flex flex-col h-full">
-                <div class="relative overflow-hidden rounded-2xl aspect-square mb-3">
-                    <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x400?text=圖片載入中'">
-                    <div class="absolute top-3 right-3 backdrop-blur-md bg-white/90 text-[#1a3a5a] px-3 py-1.5 rounded-xl shadow-sm ring-1 ring-black/5">
-                        <div class="text-sm font-black leading-none">$${p.price}</div>
+                listContainer.innerHTML += `
+                    <div class="item-card group rounded-2xl p-3 ${activeClass} transition-all flex flex-col h-full">
+                        <div class="relative overflow-hidden rounded-2xl aspect-square mb-3">
+                            <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x400?text=圖片載入中'">
+                            <div class="absolute top-3 right-3 backdrop-blur-md bg-white/90 text-[#1a3a5a] px-3 py-1.5 rounded-xl shadow-sm ring-1 ring-black/5">
+                                <div class="text-sm font-black leading-none">$${p.price}</div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-base font-bold text-center text-[#1a3a5a] tracking-wide truncate">${p.name}</h3>
+                        <p class="text-[11px] text-gray-500 text-center mt-1 font-medium truncate">${p.spec}</p>
+                        
+                        <div class="mt-2 mb-auto px-1">
+                            <p class="text-[10px] text-gray-400 text-center leading-relaxed line-clamp-2 italic">
+                                ${p.about ? '「' + p.about + '」' : ''}
+                            </p>
+                        </div>
+                        
+                        <div class="mt-4 flex items-center justify-between bg-gray-100 rounded-xl p-1">
+                            <button onclick="updateQuantity('${p.name}', ${p.price}, -1)" 
+                                    class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm active:scale-90 transition-transform">
+                                <i class="fas fa-minus text-xs text-gray-400"></i>
+                            </button>
+                            <span class="font-bold text-[#1a3a5a] text-sm">${quantity}</span>
+                            <button onclick="updateQuantity('${p.name}', ${p.price}, 1)" 
+                                    class="w-8 h-8 flex items-center justify-center bg-[#1a3a5a] text-white rounded-lg shadow-sm active:scale-90 transition-transform">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                
-                <h3 class="text-base font-bold text-center text-[#1a3a5a] tracking-wide truncate">${p.name}</h3>
-                <p class="text-[11px] text-gray-500 text-center mt-1 font-medium truncate">${p.spec}</p>
-                
-                <div class="mt-2 mb-auto px-1">
-                    <p class="text-[10px] text-gray-400 text-center leading-relaxed line-clamp-2 italic">
-                        ${p.about ? '「' + p.about + '」' : ''}
-                    </p>
-                </div>
-                
-                <div class="mt-4 flex items-center justify-between bg-gray-100 rounded-xl p-1">
-                    <button onclick="updateQuantity('${p.name}', ${p.price}, -1)" 
-                            class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm active:scale-90 transition-transform">
-                        <i class="fas fa-minus text-xs text-gray-400"></i>
-                    </button>
-                    
-                    <span class="font-bold text-[#1a3a5a] text-sm">${quantity}</span>
-                    
-                    <button onclick="updateQuantity('${p.name}', ${p.price}, 1)" 
-                            class="w-8 h-8 flex items-center justify-center bg-[#1a3a5a] text-white rounded-lg shadow-sm active:scale-90 transition-transform">
-                        <i class="fas fa-plus text-xs"></i>
-                    </button>
-                </div>
-            </div>
-        `;
-    });
-}
-
-// 修改購物車邏輯：從單選改為數量制
-function updateQuantity(name, price, delta) {
-    const index = cart.findIndex(item => item.name === name);
-    
-    if (index > -1) {
-        cart[index].quantity += delta;
-        if (cart[index].quantity <= 0) {
-            cart.splice(index, 1);
+                `;
+            });
         }
-    } else if (delta > 0) {
-        cart.push({ name, price, quantity: 1 });
-    }
-    
-    updateCartUI();
-    fetchProducts(); // 重新渲染畫面以顯示正確數量
-}
 
-// 修改 UI 更新顯示總數量
-function updateCartUI() {
-    const footer = document.getElementById('cart-footer');
-    const totalEl = document.getElementById('cart-total');
-    const badgeEl = document.getElementById('cart-count-badge');
-    
-    // 計算總金額與總件數
-    const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    if (cart.length > 0) {
-        footer.classList.remove('hidden');
-        totalEl.innerText = totalAmount.toLocaleString();
-        badgeEl.innerText = totalItems;
-    } else {
-        footer.classList.add('hidden');
-    }
-}
-// --- 新增：彈窗控制與訂單編號邏輯 ---
+        function updateQuantity(name, price, delta) {
+            const index = cart.findIndex(item => item.name === name);
+            if (index > -1) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) cart.splice(index, 1);
+            } else if (delta > 0) {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+            fetchProducts();
+        }
 
-// 控制彈窗開關
-function toggleCartModal() {
-    const modal = document.getElementById('cart-modal');
-    const listContainer = document.getElementById('cart-items-list');
-    const modalTotal = document.getElementById('modal-total');
-    
-    if (modal.classList.contains('hidden')) {
-        // 打開時，渲染清單
-        listContainer.innerHTML = cart.map(item => `
-            <div class="flex items-center justify-between bg-gray-50 p-3 rounded-xl">
-                <div class="flex-1">
-                    <p class="font-bold text-[#1a3a5a]">${item.name}</p>
-                    <p class="text-[10px] text-gray-400">$${item.price} x ${item.quantity}</p>
-                </div>
-                <p class="font-black text-[#1a3a5a]">$${(item.price * item.quantity).toLocaleString()}</p>
-            </div>
-        `).join('');
-        
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        modalTotal.innerText = total.toLocaleString();
-        modal.classList.remove('hidden');
-    } else {
-        modal.classList.add('hidden');
-    }
-}
+        function updateCartUI() {
+            const footer = document.getElementById('cart-footer');
+            const totalEl = document.getElementById('cart-total');
+            const badgeEl = document.getElementById('cart-count-badge');
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (cart.length > 0) {
+                footer.classList.remove('hidden');
+                totalEl.innerText = totalAmount.toLocaleString();
+                badgeEl.innerText = totalItems;
+            } else {
+                footer.classList.add('hidden');
+            }
+        }
 
-// 生成訂單編號 (格式：YYYYMMDD + 0001)
-function generateOrderNo() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const dateStr = `${year}${month}${day}`;
-    
-    // 從 localStorage 讀取當日的流水號
-    let lastDate = localStorage.getItem('lastOrderDate');
-    let sequence = parseInt(localStorage.getItem('orderSequence') || '0');
-    
-    if (lastDate !== dateStr) {
-        // 如果日期變了，流水號重置為 1
-        sequence = 1;
-        localStorage.setItem('lastOrderDate', dateStr);
-    } else {
-        // 同一天則遞增
-        sequence += 1;
-    }
-    
-    localStorage.setItem('orderSequence', sequence);
-    const seqStr = String(sequence).padStart(4, '0');
-    return `${dateStr}${seqStr}`;
-}
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            const listContainer = document.getElementById('cart-items-list');
+            const modalTotal = document.getElementById('modal-total');
+            
+            if (modal.classList.contains('hidden')) {
+                document.body.style.overflow = 'hidden'; 
+                listContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-xl">
+                        <div class="flex-1 text-left">
+                            <p class="font-bold text-[#1a3a5a] text-sm">${item.name}</p>
+                            <p class="text-[10px] text-gray-400">$${item.price} x ${item.quantity}</p>
+                        </div>
+                        <p class="font-black text-[#1a3a5a]">$${(item.price * item.quantity).toLocaleString()}</p>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                modalTotal.innerText = total.toLocaleString();
+                modal.classList.remove('hidden');
+            } else {
+                document.body.style.overflow = ''; 
+                modal.classList.add('hidden');
+            }
+        }
 
-function sendToLine() {
-    if (cart.length === 0) return;
-    
-    const orderNo = generateOrderNo(); // 這裡會產出如 202605140001
-    let message = `🔖 訂單編號：${orderNo}\n`;
-    message += "【生鮮團購訂購內容】\n---\n"; // 使用您的品牌名稱
-    
-    cart.forEach(item => {
-        message += `▪️ ${item.name} x${item.quantity} ($${item.price * item.quantity})\n`;
-    });
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝！`;
-    
-    const lineUrl = `https://line.me/R/oaMessage/@aaa0770f/?${encodeURIComponent(message)}`;
-    window.location.href = lineUrl;
-}
+        function generateOrderNo() {
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+            let lastDate = localStorage.getItem('lastOrderDate');
+            let sequence = parseInt(localStorage.getItem('orderSequence') || '0');
+            
+            if (lastDate !== dateStr) {
+                sequence = 1;
+                localStorage.setItem('lastOrderDate', dateStr);
+            } else {
+                sequence += 1;
+            }
+            localStorage.setItem('orderSequence', sequence);
+            return `${dateStr}${String(sequence).padStart(4, '0')}`;
+        }
 
-// 修改原有的購物車下方按鈕，改為先「打開清單」
-// 請在 updateCartUI 中確認按鈕點擊事件改為 toggleCartModal()
+        function sendToLine() {
+            if (cart.length === 0) return;
+            const orderNo = generateOrderNo();
+            let message = `🔖 訂單編號：${orderNo}\n【生鮮團購訂購內容】\n---\n`;
+            cart.forEach(item => {
+                message += `▪️ ${item.name} x${item.quantity} ($${(item.price * item.quantity).toLocaleString()})\n`;
+            });
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝！`;
+            window.location.href = `https://line.me/R/oaMessage/@aaa0770f/?${encodeURIComponent(message)}`;
+        }
 
-
-        
         fetchProducts();
     </script>
 </body>
