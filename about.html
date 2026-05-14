@@ -253,21 +253,37 @@
         }
 
         function sendToLine() {
-            if (cart.length === 0) return;
-            const orderNo = generateOrderNo();
-            let message = `🔖 訂單編號：${orderNo}\n【生鮮團購訂購內容】\n---\n`;
-            cart.forEach(item => {
-                    message += `▪️ ${item.name} x${item.quantity} ($${(item.price * item.quantity).toLocaleString()})\n`;
-                });
-                
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝！`;
-                
-                // 關鍵修正：改用 msg/text 格式
-                // 這會開啟 LINE 並跳出「傳送對象」視窗，客戶選您之後，訊息就會自動填入
-                const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
-                window.location.href = lineUrl;
-            }
+    if (cart.length === 0) {
+        alert("您的購物車還是空的喔！");
+        return;
+    }
+
+    const orderNo = generateOrderNo();
+    
+    // 1. 組合訊息內容
+    let message = `🔖 訂單編號：${orderNo}\n`;
+    message += "【生鮮團購｜訂購內容】\n---\n";
+    
+    cart.forEach(item => {
+        message += `▪️ ${item.name} x${item.quantity} ($${(item.price * item.quantity).toLocaleString()})\n`;
+    });
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n`;
+    message += `請將此訊息傳送給：蟹老闆生鮮團購 (GBianRB4XH)`; // 提示客戶對象
+
+    // 2. 使用文字分享連結 (這是個人 ID 最穩定的發送方式)
+    const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+
+    // 3. 執行跳轉
+    // 使用虛擬連結點擊法，相容性最高
+    const tempLink = document.createElement('a');
+    tempLink.href = lineUrl;
+    tempLink.style.display = 'none';
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+}
 
         fetchProducts();
     </script>
