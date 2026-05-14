@@ -93,22 +93,23 @@
         © 2026 蟹老闆 SUSHI | 生鮮團購 FRESH FOOD
     </footer>
 
-    <div id="cart-footer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md bg-[#1a3a5a] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 hidden fade-in">
-        <div class="flex items-center space-x-3">
-            <div class="relative">
-                <i class="fas fa-shopping-basket text-2xl text-[#D4AF37]"></i>
-                <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#1a3a5a]">0</span>
+        <div id="cart-footer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md bg-[#1a3a5a] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 hidden fade-in">
+            <div class="flex items-center space-x-3">
+                <div class="relative">
+                    <i class="fas fa-shopping-basket text-2xl text-[#D4AF37]"></i>
+                    <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#1a3a5a]">0</span>
+                </div>
+                <div>
+                    <p class="text-[10px] opacity-60">目前預算累計</p>
+                    <p class="text-lg font-black">$ <span id="cart-total">0</span></p>
+                </div>
             </div>
-            <div>
-                <p class="text-[10px] opacity-60">目前預算累計</p>
-                <p class="text-lg font-black">$ <span id="cart-total">0</span></p>
-            </div>
+            
+            <button onclick="toggleCartModal()" class="bg-[#D4AF37] text-[#1a3a5a] px-6 py-2 rounded-xl font-bold flex items-center space-x-2 transition-all active:scale-95">
+                <i class="fas fa-list-ul mr-1"></i>
+                <span>查看清單</span>
+            </button>
         </div>
-        <button onclick="sendToLine()" class="bg-[#06C755] hover:bg-[#05b34c] text-white px-6 py-2 rounded-xl font-bold flex items-center space-x-2 transition-all active:scale-95">
-            <i class="fab fa-line text-xl"></i>
-            <span>傳送訂單</span>
-        </button>
-    </div>
 
     <script>
         const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTITgLIl15r_SWgqFL4DihsAMIsMqOrZZD6l6GLgXC9orSXQEm-Dh5kHlp1Ee8ZA6FHlMUA1HCUjGII/pub?output=csv";
@@ -216,6 +217,8 @@ function updateCartUI() {
         footer.classList.add('hidden');
     }
 }
+// --- 新增：彈窗控制與訂單編號邏輯 ---
+
 // 控制彈窗開關
 function toggleCartModal() {
     const modal = document.getElementById('cart-modal');
@@ -268,24 +271,26 @@ function generateOrderNo() {
     return `${dateStr}${seqStr}`;
 }
 
-// 修改 LINE 訊息內容
 function sendToLine() {
     if (cart.length === 0) return;
-    let message = "【生鮮團購訂購單】\n---\n";
+    
+    const orderNo = generateOrderNo(); // 這裡會產出如 202605140001
+    let message = `🔖 訂單編號：${orderNo}\n`;
+    message += "【生鮮團購訂購內容】\n---\n"; // 使用您的品牌名稱
     
     cart.forEach(item => {
-        message += `▪️ ${item.name} x${item.quantity}\n`;
+        message += `▪️ ${item.name} x${item.quantity} ($${item.price * item.quantity})\n`;
     });
     
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請確認訂單後回覆告知，謝謝！`;
+    message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝！`;
     
-              // 使用您的官方 LINE ID
     const lineUrl = `https://line.me/R/oaMessage/@aaa0770f/?${encodeURIComponent(message)}`;
     window.location.href = lineUrl;
-
-    
 }
+
+// 修改原有的購物車下方按鈕，改為先「打開清單」
+// 請在 updateCartUI 中確認按鈕點擊事件改為 toggleCartModal()
 
 
         
