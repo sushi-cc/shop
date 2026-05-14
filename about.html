@@ -22,7 +22,6 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .item-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .price-tag { background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); }
     </style>
 </head>
 <body class="text-[#1a3a5a]">
@@ -30,11 +29,14 @@
     <header class="relative pt-24 pb-28 px-6 text-center overflow-hidden bg-gray-900">
         <img src="https://i.postimg.cc/SxjN3RKF/logofomin.jpg" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-40">
         <div class="relative z-10 fade-in container mx-auto">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-[0.25em] mb-3 text-white">生鮮團購</h1>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-[0.25em] mb-3 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                生鮮團購
+            </h1>
             <p class="text-xs md:text-sm font-medium tracking-[0.3em] text-white opacity-90 mb-8">FRESH FOOD</p>
             <div class="h-[1.5px] w-16 bg-[#D4AF37] mx-auto mb-8 shadow-lg"></div>
             <p class="max-w-md mx-auto text-base md:text-lg leading-loose font-light text-slate-100 italic tracking-wider">
-                「尋遍山海，只為一抹鮮甜。」
+                「尋遍山海，只為一抹鮮甜。<br>
+                <span class="text-white font-normal">將大海的饋贈完整呈獻。</span>」
             </p>
         </div>
     </header>
@@ -53,39 +55,45 @@
     <main class="max-w-5xl mx-auto px-4 py-10">
         <div class="flex items-center mb-8">
             <h2 class="text-xl font-bold border-l-4 border-[#D4AF37] pl-3">本週嚴選生鮮</h2>
-            <span class="ml-auto text-[10px] bg-red-500 text-white px-2 py-1 rounded-full animate-pulse">多件優惠中</span>
+            <span class="ml-auto text-[10px] bg-red-500 text-white px-2 py-1 rounded-full animate-pulse">限量供應</span>
         </div>
         <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20"></div>
     </main>
 
+    <footer class="bg-white py-10 text-center opacity-60 text-[10px] tracking-widest">
+        © 2026 蟹老闆 SUSHI | 生鮮團購 FRESH FOOD
+    </footer>
+
     <div id="cart-footer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md bg-[#1a3a5a] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 hidden fade-in">
-        <div onclick="toggleCartModal()" class="flex items-center space-x-3 cursor-pointer">
+        <div onclick="toggleCartModal()" class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity">
             <div class="relative">
                 <i class="fas fa-shopping-basket text-2xl text-[#D4AF37]"></i>
-                <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#1a3a5a]">0</span>
             </div>
             <div>
-                <p class="text-[10px] opacity-60">合計優惠價</p>
+                <p class="text-[10px] opacity-60">目前累計優惠價 (點擊查看)</p>
                 <p class="text-lg font-black">$ <span id="cart-total">0</span></p>
             </div>
         </div>
-        <button onclick="toggleCartModal()" class="bg-[#D4AF37] text-[#1a3a5a] px-6 py-2 rounded-xl font-bold active:scale-95 transition-all">查看清單</button>
+        <button onclick="toggleCartModal()" class="bg-[#D4AF37] text-[#1a3a5a] px-6 py-2 rounded-xl font-bold flex items-center space-x-2 transition-all active:scale-95">
+            <i class="fas fa-list-ul mr-1"></i><span>查看清單</span>
+        </button>
     </div>
 
     <div id="cart-modal" class="fixed inset-0 z-[70] hidden">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleCartModal()"></div>
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-3xl p-6 shadow-2xl">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-3xl p-6 shadow-2xl transition-transform duration-300">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-xl font-bold text-[#1a3a5a]">確認訂購內容</h3>
-                <button onclick="toggleCartModal()"><i class="fas fa-times text-xl text-gray-400"></i></button>
+                <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times text-xl"></i></button>
             </div>
-            <div id="cart-items-list" class="max-h-[50vh] overflow-y-auto space-y-4 mb-6"></div>
-            <div class="border-t pt-4 mb-6 flex justify-between items-center">
-                <span class="text-gray-500">總計金額</span>
+            <div id="cart-items-list" class="max-h-[60vh] overflow-y-auto space-y-4 mb-6 no-scrollbar"></div>
+            <div class="border-t border-gray-100 pt-4 mb-6 flex justify-between items-center">
+                <span class="text-gray-500 text-sm">總計金額</span>
                 <span class="text-2xl font-black text-[#1a3a5a]">$ <span id="modal-total">0</span></span>
             </div>
-            <button onclick="sendToLine()" class="w-full bg-[#06C755] text-white py-4 rounded-2xl font-bold flex items-center justify-center space-x-2">
-                <i class="fab fa-line text-2xl"></i><span>發送 Line 訂單</span>
+            <button onclick="sendToLine()" class="w-full bg-[#06C755] text-white py-4 rounded-2xl font-bold flex items-center justify-center space-x-2 shadow-lg active:scale-95 transition-all">
+                <i class="fab fa-line text-2xl"></i><span>確認訂單並發送</span>
             </button>
         </div>
     </div>
@@ -93,104 +101,121 @@
     <script>
         const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTITgLIl15r_SWgqFL4DihsAMIsMqOrZZD6l6GLgXC9orSXQEm-Dh5kHlp1Ee8ZA6FHlMUA1HCUjGII/pub?output=csv";
         let cart = [];
-        let globalProducts = [];
+        let allProducts = []; // 全域產品清單
 
         async function fetchProducts() {
             try {
                 const response = await fetch(sheetUrl);
                 const data = await response.text();
                 const rows = data.split('\n').slice(1);
-                globalProducts = rows.filter(row => row.trim() !== '').map((row, index) => {
+                allProducts = rows.filter(row => row.trim() !== '').map((row, index) => {
                     const cols = row.split(',');
-                    // 解析階梯價格：將 "100,180,280,360" 轉成陣列 [100, 180, 280, 360]
-                    const tieredPrices = cols[5] ? cols[5].trim().split('|').map(p => parseInt(p)) : [];
                     return {
                         id: index,
-                        name: cols[0]?.trim() || "未命名",
-                        price: parseInt(cols[1]) || 0,
-                        img: cols[2]?.trim() || "",
-                        spec: cols[3]?.trim() || "",
-                        about: cols[4]?.trim() || "",
-                        tieredPrices: tieredPrices // 新增階梯價格陣列
+                        name: cols[0] ? cols[0].trim() : "未命名",
+                        price: cols[1] ? parseInt(cols[1]) : 0,
+                        img: cols[2] ? cols[2].trim() : "",
+                        spec: cols[3] ? cols[3].trim() : "",
+                        about: cols[4] ? cols[4].trim() : "",
+                        // 新增：處理階梯價格 (第6欄)
+                        tieredPrices: cols[5] ? cols[5].trim().split('|').map(p => parseInt(p)) : []
                     };
                 });
-                renderProducts();
+                renderProducts(allProducts);
             } catch (error) {
                 console.error("資料讀取失敗:", error);
             }
         }
 
-        // 計算該項商品在特定數量下的總價
-        function calculateItemTotal(product, quantity) {
-            if (quantity <= 0) return 0;
+        // 核心邏輯：計算階梯價格
+        function calculateCurrentPrice(product, quantity) {
+            if (quantity === 0) return 0;
+            // 如果有階梯價格且數量在範圍內
             if (product.tieredPrices && product.tieredPrices.length > 0) {
-                // 如果數量超過階梯設定，取最後一個價格
-                const priceIndex = Math.min(quantity, product.tieredPrices.length) - 1;
-                return product.tieredPrices[priceIndex];
+                const index = Math.min(quantity, product.tieredPrices.length) - 1;
+                return product.tieredPrices[index];
             }
-            return product.price * quantity; // 備援方案：一般單價計算
+            // 如果沒有階梯價格，使用原始單價計算
+            return product.price * quantity;
         }
 
-        function renderProducts() {
+        function renderProducts(productList) {
             const listContainer = document.getElementById('product-list');
             listContainer.innerHTML = ''; 
 
-            globalProducts.forEach(p => {
+            productList.forEach(p => {
                 const cartItem = cart.find(item => item.name === p.name);
                 const quantity = cartItem ? cartItem.quantity : 0;
                 const activeClass = quantity > 0 ? "ring-2 ring-[#D4AF37] bg-amber-50" : "bg-white shadow-sm";
+                
+                // 顯示標籤提示
+                const priceDisplay = p.tieredPrices.length > 0 ? `$${p.tieredPrices[0]} 起` : `$${p.price}`;
 
                 listContainer.innerHTML += `
-                    <div class="item-card group rounded-2xl p-3 ${activeClass} flex flex-col h-full">
+                    <div class="item-card group rounded-2xl p-3 ${activeClass} transition-all flex flex-col h-full">
                         <div class="relative overflow-hidden rounded-2xl aspect-square mb-3">
-                            <img src="${p.img}" class="w-full h-full object-cover">
-                            <div class="absolute top-2 right-2 price-tag text-white px-2 py-1 rounded-lg shadow-md text-xs font-bold">
-                                $${p.price}${p.tieredPrices.length > 0 ? ' 起' : ''}
+                            <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x400?text=圖片載入中'">
+                            <div class="absolute top-3 right-3 backdrop-blur-md bg-white/90 text-[#1a3a5a] px-3 py-1.5 rounded-xl shadow-sm ring-1 ring-black/5">
+                                <div class="text-sm font-black leading-none">${priceDisplay}</div>
                             </div>
                         </div>
-                        <h3 class="text-sm font-bold text-center truncate">${p.name}</h3>
-                        <p class="text-[10px] text-gray-400 text-center truncate">${p.spec}</p>
+                        <h3 class="text-base font-bold text-center text-[#1a3a5a] tracking-wide truncate">${p.name}</h3>
+                        <p class="text-[11px] text-gray-500 text-center mt-1 font-medium truncate">${p.spec}</p>
+                        <div class="mt-2 mb-auto px-1">
+                            <p class="text-[10px] text-gray-400 text-center leading-relaxed line-clamp-2 italic">
+                                ${p.about ? '「' + p.about + '」' : ''}
+                            </p>
+                        </div>
                         <div class="mt-4 flex items-center justify-between bg-gray-100 rounded-xl p-1">
-                            <button onclick="updateQuantity('${p.name}', -1)" class="w-8 h-8 bg-white rounded-lg shadow-sm active:scale-90">-</button>
-                            <span class="font-bold text-sm">${quantity}</span>
-                            <button onclick="updateQuantity('${p.name}', 1)" class="w-8 h-8 bg-[#1a3a5a] text-white rounded-lg shadow-sm active:scale-90">+</button>
+                            <button onclick="updateQuantity('${p.name}', -1)" 
+                                    class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm active:scale-90 transition-transform">
+                                <i class="fas fa-minus text-xs text-gray-400"></i>
+                            </button>
+                            <span class="font-bold text-[#1a3a5a] text-sm">${quantity}</span>
+                            <button onclick="updateQuantity('${p.name}', 1)" 
+                                    class="w-8 h-8 flex items-center justify-center bg-[#1a3a5a] text-white rounded-lg shadow-sm active:scale-90 transition-transform">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
                         </div>
                     </div>
                 `;
             });
-            updateCartUI();
         }
 
         function updateQuantity(name, delta) {
-            const product = globalProducts.find(p => p.name === name);
+            const product = allProducts.find(p => p.name === name);
             const index = cart.findIndex(item => item.name === name);
-
+            
             if (index > -1) {
                 cart[index].quantity += delta;
                 if (cart[index].quantity <= 0) {
                     cart.splice(index, 1);
                 } else {
-                    cart[index].totalPrice = calculateItemTotal(product, cart[index].quantity);
+                    cart[index].totalPrice = calculateCurrentPrice(product, cart[index].quantity);
                 }
             } else if (delta > 0) {
                 cart.push({ 
                     name, 
                     quantity: 1, 
-                    totalPrice: calculateItemTotal(product, 1) 
+                    totalPrice: calculateCurrentPrice(product, 1) 
                 });
             }
-            renderProducts();
+            updateCartUI();
+            renderProducts(allProducts);
         }
 
         function updateCartUI() {
             const footer = document.getElementById('cart-footer');
+            const totalEl = document.getElementById('cart-total');
+            const badgeEl = document.getElementById('cart-count-badge');
+            
             const totalAmount = cart.reduce((sum, item) => sum + item.totalPrice, 0);
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             
             if (cart.length > 0) {
                 footer.classList.remove('hidden');
-                document.getElementById('cart-total').innerText = totalAmount.toLocaleString();
-                document.getElementById('cart-count-badge').innerText = totalItems;
+                totalEl.innerText = totalAmount.toLocaleString();
+                badgeEl.innerText = totalItems;
             } else {
                 footer.classList.add('hidden');
             }
@@ -198,33 +223,60 @@
 
         function toggleCartModal() {
             const modal = document.getElementById('cart-modal');
+            const listContainer = document.getElementById('cart-items-list');
+            const modalTotal = document.getElementById('modal-total');
+            
             if (modal.classList.contains('hidden')) {
-                const listContainer = document.getElementById('cart-items-list');
+                document.body.style.overflow = 'hidden'; 
                 listContainer.innerHTML = cart.map(item => `
                     <div class="flex items-center justify-between bg-gray-50 p-3 rounded-xl">
-                        <div class="text-left">
-                            <p class="font-bold text-sm">${item.name}</p>
+                        <div class="flex-1 text-left">
+                            <p class="font-bold text-[#1a3a5a] text-sm">${item.name}</p>
                             <p class="text-[10px] text-gray-400">數量: ${item.quantity}</p>
                         </div>
                         <p class="font-black text-[#1a3a5a]">$${item.totalPrice.toLocaleString()}</p>
                     </div>
                 `).join('');
-                document.getElementById('modal-total').innerText = cart.reduce((sum, item) => sum + item.totalPrice, 0).toLocaleString();
+                
+                const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                modalTotal.innerText = total.toLocaleString();
                 modal.classList.remove('hidden');
             } else {
+                document.body.style.overflow = ''; 
                 modal.classList.add('hidden');
             }
         }
 
+        function generateOrderNo() {
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+            let lastDate = localStorage.getItem('lastOrderDate');
+            let sequence = parseInt(localStorage.getItem('orderSequence') || '0');
+            
+            if (lastDate !== dateStr) {
+                sequence = 1;
+                localStorage.setItem('lastOrderDate', dateStr);
+            } else {
+                sequence += 1;
+            }
+            localStorage.setItem('orderSequence', sequence);
+            return `${dateStr}${String(sequence).padStart(4, '0')}`;
+        }
+
         function sendToLine() {
-            if (cart.length === 0) return;
-            let message = `🔖 【生鮮團購多件優惠訂單】\n---\n`;
+            if (cart.length === 0) {
+                alert("您的購物車還是空的喔！");
+                return;
+            }
+            const orderNo = generateOrderNo();
+            let message = `🔖 訂單編號：${orderNo}\n【生鮮團購｜階梯優惠訂單】\n---\n`;
             cart.forEach(item => {
-                message += `▪️ ${item.name} x${item.quantity} (小計:$${item.totalPrice})\n`;
+                message += `▪️ ${item.name} x${item.quantity} ($${item.totalPrice.toLocaleString()})\n`;
             });
             const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-            message += `---\n💰 總計優惠價：NT$ ${total.toLocaleString()}`;
-            window.location.href = `https://line.me/R/oaMessage/@aaa0770f/?${encodeURIComponent(message)}`;
+            message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝!`;
+            const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+            window.location.href = lineUrl;
         }
 
         fetchProducts();
