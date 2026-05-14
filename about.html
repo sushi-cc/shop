@@ -270,7 +270,7 @@
     
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n`;
-    message += `請將此訊息傳送給：蟹老闆生鮮團購 (GBianRB4XH)`; // 提示客戶對象
+    message += `請協助確認訂單內容，謝謝!`; // 提示客戶對象
 
     // 2. 使用文字分享連結 (這是個人 ID 最穩定的發送方式)
     const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
