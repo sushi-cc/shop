@@ -66,23 +66,24 @@
         © 2026 蟹老闆 SUSHI | 生鮮團購 FRESH FOOD
     </footer>
 
-    <div id="cart-footer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md bg-[#1a3a5a] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 hidden fade-in">
-        <div class="flex items-center space-x-3">
-            <div class="relative">
-                <i class="fas fa-shopping-basket text-2xl text-[#D4AF37]"></i>
-                <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#1a3a5a]">0</span>
-            </div>
-            <div>
-                <p class="text-[10px] opacity-60">目前預算累計</p>
-                <p class="text-lg font-black">$ <span id="cart-total">0</span></p>
-            </div>
+<div id="cart-footer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md bg-[#1a3a5a] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 hidden fade-in">
+    
+    <div onclick="toggleCartModal()" class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity">
+        <div class="relative">
+            <i class="fas fa-shopping-basket text-2xl text-[#D4AF37]"></i>
+            <span id="cart-count-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#1a3a5a]">0</span>
         </div>
-        
-        <button onclick="toggleCartModal()" class="bg-[#D4AF37] text-[#1a3a5a] px-6 py-2 rounded-xl font-bold flex items-center space-x-2 transition-all active:scale-95">
-            <i class="fas fa-list-ul mr-1"></i>
-            <span>查看清單</span>
-        </button>
+        <div>
+            <p class="text-[10px] opacity-60">目前預算累計 (點擊查看)</p>
+            <p class="text-lg font-black">$ <span id="cart-total">0</span></p>
+        </div>
     </div>
+    
+    <button onclick="toggleCartModal()" class="bg-[#D4AF37] text-[#1a3a5a] px-6 py-2 rounded-xl font-bold flex items-center space-x-2 transition-all active:scale-95">
+        <i class="fas fa-list-ul mr-1"></i>
+        <span>查看清單</span>
+    </button>
+</div>
 
     <div id="cart-modal" class="fixed inset-0 z-[70] hidden">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleCartModal()"></div>
