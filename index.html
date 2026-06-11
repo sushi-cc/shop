@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -146,33 +146,37 @@
         </div>
 
         <script>
-            // 獨立的宴會盤互動邏輯控制 (簡化版本)
+            // 獨立的宴會盤互動邏輯控制 (無縫輪播版本)
             (function() {
                 const slider = document.getElementById('banquet-slider');
                 const dots = document.querySelectorAll('.banquet-dot');
-                const totalSlides = slider.children.length; // 總共 3 張圖
-                let slideIndex = 0; 
+                const originalSlides = Array.from(slider.children);
+                const totalOriginalSlides = originalSlides.length; // 總共 3 張圖
+                
+                // 複製第一張與最後一張，用於頭尾無縫接軌
+                const firstClone = originalSlides[0].cloneNode(true);
+                const lastClone = originalSlides[totalOriginalSlides - 1].cloneNode(true);
+                
+                firstClone.id = 'first-clone';
+                lastClone.id = 'last-clone';
+                
+                slider.appendChild(firstClone);
+                slider.insertBefore(lastClone, originalSlides[0]);
+                
+                let slideIndex = 1; // 從真正的第一張開始
                 let isTransitioning = false;
+                
+                // 初始定位到真正的第一張 (取消過場動畫)
+                slider.style.transition = 'none';
+                slider.style.transform = `translateX(-100%)`;
 
-                function showSlides(index) {
-                    if (isTransitioning) return;
-                    isTransitioning = true;
-                    
-                    // 索引循環邏輯
-                    if (index >= totalSlides) {
-                        slideIndex = 0;
-                    } else if (index < 0) {
-                        slideIndex = totalSlides - 1;
-                    } else {
-                        slideIndex = index;
-                    }
-                    
-                    slider.style.transition = 'transform 0.5s ease-out';
-                    slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-                    
-                    // 更新圓點指示器
+                function updateDots() {
+                    let activeIndex = slideIndex - 1;
+                    if (activeIndex === totalOriginalSlides) activeIndex = 0; // 到了第一個 clone
+                    if (activeIndex < 0) activeIndex = totalOriginalSlides - 1; // 到了最後一個 clone
+
                     dots.forEach((dot, i) => {
-                        if (i === slideIndex) {
+                        if (i === activeIndex) {
                             dot.classList.remove('bg-white/40');
                             dot.classList.add('bg-white', 'w-4');
                         } else {
@@ -180,20 +184,41 @@
                             dot.classList.add('bg-white/40');
                         }
                     });
-
-                    // 避免動畫期間重複點擊
-                    setTimeout(() => {
-                        isTransitioning = false;
-                    }, 500);
                 }
 
                 function nextSlide() {
-                    showSlides(slideIndex + 1);
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    slideIndex++;
+                    slider.style.transition = 'transform 0.5s ease-out';
+                    slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    updateDots();
                 }
 
                 function prevSlide() {
-                    showSlides(slideIndex - 1);
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    slideIndex--;
+                    slider.style.transition = 'transform 0.5s ease-out';
+                    slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    updateDots();
                 }
+
+                // 監聽過場動畫結束，進行瞬間偷天換日的切換 (製造無縫迴圈錯覺)
+                slider.addEventListener('transitionend', () => {
+                    isTransitioning = false;
+                    const slides = slider.children;
+                    if (slides[slideIndex].id === 'first-clone') {
+                        slider.style.transition = 'none'; // 取消動畫
+                        slideIndex = 1; // 瞬間切回真正的第一張
+                        slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    }
+                    if (slides[slideIndex].id === 'last-clone') {
+                        slider.style.transition = 'none'; // 取消動畫
+                        slideIndex = totalOriginalSlides; // 瞬間切回真正的最後一張
+                        slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    }
+                });
 
                 // 自動順暢輪播定時器 (每 3 秒自動向後跳下一張)
                 let autoSlideInterval = setInterval(nextSlide, 3000);
@@ -243,9 +268,8 @@
                     if (e.target === modal) hideModal();
                 });
 
-                // 初始化第一個點的長條樣式
-                dots[0].classList.add('bg-white', 'w-4');
-                dots[0].classList.remove('bg-white/40');
+                // 初始化圓點
+                updateDots();
             })();
         </script>
 
