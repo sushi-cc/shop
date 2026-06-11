@@ -34,30 +34,21 @@
 </head>
 <body class="text-[#1a3a5a]">
 
-    <!-- Header & Hero Section -->
-    <!--<header class="bg-[#1a3a5a] text-white pt-16 pb-20 px-6 text-center relative overflow-hidden">-->
-<header class="relative pt-24 pb-28 px-6 text-center overflow-hidden bg-gray-900">
-  <!-- 背景圖片層 -->
+    <header class="relative pt-24 pb-28 px-6 text-center overflow-hidden bg-gray-900">
   <img 
     src="https://i.postimg.cc/SxjN3RKF/logofomin.jpg" 
     alt="Brand Background" 
-    class="absolute inset-0 w-full h-full object-cover opacity-40"> <!-- 稍微提高透明度讓背景藍黑感更穩 -->
-
-  <div class="relative z-10 fade-in container mx-auto">
-    <!-- 主標題：使用純白與細微陰影 -->
+    class="absolute inset-0 w-full h-full object-cover opacity-40"> <div class="relative z-10 fade-in container mx-auto">
     <h1 class="text-4xl md:text-5xl font-bold tracking-[0.25em] mb-3 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
       蟹老闆｜壽司
     </h1>
 
-    <!-- 英文標題：使用高亮珍珠白，並增加透明度區分層級 -->
     <p class="text-xs md:text-sm font-medium tracking-[0.3em] text-white opacity-90 mb-8">
       SUSHI&SEAFOOD
     </p>
 
-    <!-- 分隔線：改成亮金色，增加職人高級感 -->
     <div class="h-[1.5px] w-16 bg-[#D4AF37] mx-auto mb-8 shadow-lg"></div>
 
-    <!-- 文案：使用明亮的柔白色，字級稍微放大確保易讀性 -->
     <p class="max-w-md mx-auto text-base md:text-lg leading-loose font-light text-slate-100 italic tracking-wider">
       「一貫入魂，職人手作的溫度，<br>
       <span class="text-white font-normal">在舌尖綻放最純粹的旬味。</span>」
@@ -76,12 +67,10 @@
 </div>
   </div>
 </header>
-        <!-- 裝飾背景文字 -->
         <div class="absolute top-10 -right-5 opacity-10 text-8xl font-bold select-none">SUSHI</div>
     
 
-  <!-- Sticky Navigation -->
-        <nav class="sticky top-0 z-50 bg-[#1a3a5a] border-b border-[#D4AF37]/20 text-white px-4 py-4 shadow-xl">
+  <nav class="sticky top-0 z-50 bg-[#1a3a5a] border-b border-[#D4AF37]/20 text-white px-4 py-4 shadow-xl">
             <div class="flex space-x-4 overflow-x-auto no-scrollbar whitespace-nowrap text-sm justify-center items-center">
                 <a href="index.html" class="px-6 py-2 transition-all duration-300 hover:text-amber-200 active-tab">
                     <i class="fas fa-fish mr-2"></i>蟹老闆壽司區
@@ -92,10 +81,199 @@
                 </a>
             </div>
         </nav>
-    <!-- Menu Grid -->
     <main class="max-w-5xl mx-auto px-4 py-12">
         
-        <!-- Category: 握壽司 -->
+        <section id="banquet" class="mb-16 fade-in flex flex-col items-center">
+            <div class="w-full flex items-center mb-8">
+                <h2 class="text-xl font-bold border-l-4 border-[#8B5E3C] pl-3">盛宴分享盤</h2>
+                <span class="ml-auto text-xs text-gray-400 font-light">採預約制</span>
+            </div>
+            
+            <div class="w-full max-w-sm md:max-w-md bg-white rounded-2xl shadow-xl overflow-hidden item-card group cursor-pointer transition-all duration-300 hover:shadow-2xl border border-gray-100/80 relative" id="banquet-card">
+                
+                <div class="relative aspect-[3/4] overflow-hidden bg-gray-900">
+                    <div id="banquet-slider" class="flex w-full h-full">
+                        <img src="https://i.postimg.cc/bNbVg8px/1-01.jpg" alt="宴會盤展示一" class="w-full h-full object-cover flex-shrink-0">
+                        <img src="https://i.postimg.cc/HxDVQQ2q/1-02.jpg" alt="宴會盤展示二" class="w-full h-full object-cover flex-shrink-0">
+                        <img src="https://i.postimg.cc/28v9Gmrd/1-03.jpg" alt="宴會盤展示三" class="w-full h-full object-cover flex-shrink-0">
+                    </div>
+                    
+                    <button id="banquet-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm transition-all z-10 opacity-0 group-hover:opacity-100">
+                        <i class="fas fa-chevron-left text-sm"></i>
+                    </button>
+                    <button id="banquet-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm transition-all z-10 opacity-0 group-hover:opacity-100">
+                        <i class="fas fa-chevron-right text-sm"></i>
+                    </button>
+                    
+                    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+                        <span class="banquet-dot w-2 h-2 rounded-full bg-white transition-all duration-300"></span>
+                        <span class="banquet-dot w-2 h-2 rounded-full bg-white/40 transition-all duration-300"></span>
+                        <span class="banquet-dot w-2 h-2 rounded-full bg-white/40 transition-all duration-300"></span>
+                    </div>
+
+                    <div class="absolute bottom-4 right-4 bg-[#1a3a5a]/80 text-[#D4AF37] text-xs px-3 py-1.5 rounded-lg backdrop-blur-sm tracking-wider font-medium">
+                        <i class="fas fa-info-circle mr-1"></i> 訂購客製化商品
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="banquet-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity opacity-0 duration-300">
+            <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 border border-gray-100">
+                <div class="bg-[#1a3a5a] text-white p-6 relative">
+                    <h3 class="text-xl font-bold tracking-wider text-center text-[#D4AF37]">盛宴分享盤</h3>
+                    <button id="close-banquet-modal" class="absolute top-5 right-5 text-white/70 hover:text-white transition-colors text-xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="p-6 space-y-4 text-gray-700">
+                    <p class="text-sm leading-relaxed border-b border-gray-100 pb-4 text-gray-500 italic">
+                        「讓相聚的時光，多一點澎湃與分享的快樂。平價高 CP 值的美味，不管是大小聚會都能輕鬆撐起場面，兼顧視覺與胃口的雙重滿足！」
+                    </p>
+                    
+                    <div class="space-y-3 text-sm">
+                        <div class="flex"><span class="font-bold text-[#1a3a5a] w-20 shrink-0">商品內容：</span><span class="text-gray-600">商品內容皆可依您的喜好「客製化」調整。</span></div>
+                        <div class="flex"><span class="font-bold text-[#1a3a5a] w-20 shrink-0">彈性計價：</span><span class="text-gray-600">實際金額將依當日嚴選的配料彈性調整，給您最實在的美味。
+                             天透過 LINE 官方帳號進行預約。</span></div>
+                        <div class="flex"><span class="font-bold text-[#1a3a5a] w-20 shrink-0">如何訂購:</span><span class="text-gray-600">請提前至少 1 週私訊我們的 LINE 帳號詢問預訂，讓我們為您提早準備。</span></div>
+                    </div>
+                    <div class="pt-4 border-t border-gray-100">
+                        <a href="https://line.me/ti/p/GBianRB4XH" target="_blank" class="w-full bg-[#06C755] text-white py-3 rounded-xl flex items-center justify-center font-bold tracking-wider hover:opacity-90 transition-opacity shadow-lg shadow-green-600/20">
+                            <i class="fab fa-line mr-2 text-xl"></i> 線上洽詢職人專屬預約
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // 獨立的宴會盤互動邏輯控制
+            (function() {
+                const slider = document.getElementById('banquet-slider');
+                const originalSlides = Array.from(slider.children);
+                const totalSlides = originalSlides.length;
+                
+                // 動態複製首尾圖片，達成完美的無縫循環輪播效果
+                const firstClone = originalSlides[0].cloneNode(true);
+                const lastClone = originalSlides[totalSlides - 1].cloneNode(true);
+                
+                slider.appendChild(firstClone);
+                slider.insertBefore(lastClone, originalSlides[0]);
+                
+                const dots = document.querySelectorAll('.banquet-dot');
+                let slideIndex = 1; // 從 index 1 (真正的第一張圖) 開始
+                let isTransitioning = false;
+
+                // 初始化容器位置
+                slider.style.transition = 'none';
+                slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+                function showSlides(index, hasTransition = true) {
+                    if (isTransitioning) return;
+                    slideIndex = index;
+                    
+                    if (hasTransition) {
+                        slider.style.transition = 'transform 0.5s ease-out';
+                        isTransitioning = true;
+                    } else {
+                        slider.style.transition = 'none';
+                    }
+                    
+                    slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    
+                    // 計算並更新對應的指示點 (Dots)
+                    let dotIndex = slideIndex - 1;
+                    if (dotIndex >= totalSlides) dotIndex = 0;
+                    if (dotIndex < 0) dotIndex = totalSlides - 1;
+                    
+                    dots.forEach((dot, i) => {
+                        if (i === dotIndex) {
+                            dot.classList.remove('bg-white/40');
+                            dot.classList.add('bg-white', 'w-4');
+                        } else {
+                            dot.classList.remove('bg-white', 'w-4');
+                            dot.classList.add('bg-white/40');
+                        }
+                    });
+                }
+
+                // 監聽過渡動畫結束，處理邊界瞬間歸位 (實現無縫感)
+                slider.addEventListener('transitionend', () => {
+                    isTransitioning = false;
+                    if (slideIndex >= totalSlides + 1) {
+                        slider.style.transition = 'none';
+                        slideIndex = 1;
+                        slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    } else if (slideIndex <= 0) {
+                        slider.style.transition = 'none';
+                        slideIndex = totalSlides;
+                        slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    }
+                });
+
+                function nextSlide() {
+                    if (isTransitioning) return;
+                    showSlides(slideIndex + 1);
+                }
+
+                function prevSlide() {
+                    if (isTransitioning) return;
+                    showSlides(slideIndex - 1);
+                }
+
+                // 自動順暢輪播定時器 (每 3 秒自動向後跳下一張)
+                let autoSlideInterval = setInterval(nextSlide, 3000);
+
+                function resetTimer() {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = setInterval(nextSlide, 3000);
+                }
+
+                document.getElementById('banquet-next').addEventListener('click', function(e) {
+                    e.stopPropagation(); // 阻止冒泡避免觸發彈窗
+                    nextSlide();
+                    resetTimer(); // 點擊後重新計時，避免頻繁閃爍
+                });
+
+                document.getElementById('banquet-prev').addEventListener('click', function(e) {
+                    e.stopPropagation(); // 阻止冒泡避免觸發彈窗
+                    prevSlide();
+                    resetTimer(); // 點擊後重新計時
+                });
+
+                // 說明欄彈窗互動控制
+                const modal = document.getElementById('banquet-modal');
+                const card = document.getElementById('banquet-card');
+                const closeBtn = document.getElementById('close-banquet-modal');
+
+                card.addEventListener('click', function() {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    setTimeout(() => {
+                        modal.classList.remove('opacity-0');
+                        modal.querySelector('.transform').classList.remove('scale-95');
+                    }, 10);
+                });
+
+                function hideModal() {
+                    modal.classList.add('opacity-0');
+                    modal.querySelector('.transform').classList.add('scale-95');
+                    setTimeout(() => {
+                        modal.classList.remove('flex');
+                        modal.classList.add('hidden');
+                    }, 300);
+                }
+
+                closeBtn.addEventListener('click', hideModal);
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) hideModal();
+                });
+
+                // 初始化第一個點的長條樣式
+                dots[0].classList.add('bg-white', 'w-4');
+                dots[0].classList.remove('bg-white/40');
+            })();
+        </script>
         <section id="nigiri" class="mb-16 fade-in">
             <div class="flex items-center mb-8">
                 <h2 class="text-xl font-bold border-l-4 border-[#8B5E3C] pl-3">經典握壽司</h2>
@@ -103,7 +281,6 @@
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
-                <!-- 品項卡片 (重複此結構 34 次) -->
                 <script>
                     const products = [
                         { name: "茶碗蒸", price: "30", img: "https://i.postimg.cc/4NKV0yk4/cha-wan-zheng.jpg" },
@@ -202,13 +379,10 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-white py-12 px-6 border-t border-gray-100 text-center">
         
         <div class="flex justify-center space-x-4">
-           <!-- <a href="#" class="w-8 h-8 rounded-full bg-[#1a3a5a] text-white flex items-center justify-center text-xs"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="w-8 h-8 rounded-full bg-[#1a3a5a] text-white flex items-center justify-center text-xs"><i class="fab fa-instagram"></i></a>-->
-        </div>
+           </div>
         <div>
             <h4 class="font-bold text-[#1a3a5a] mb-4 border-b-2 border-[#D4AF37] w-fit mx-auto md:mx-0">草屯總店</h4>
             <ul class="text-sm text-gray-600 space-y-2">
@@ -244,7 +418,6 @@
     </div>
     </footer>
 
-    <!-- Floating Action Button (LINE) -->
     <a href="https://line.me/ti/p/GBianRB4XH" target="_blank" class="fixed bottom-6 right-6 z-[60] bg-[#06C755] text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition-transform active:scale-95">
         <i class="fab fa-line"></i>
         <span class="absolute -top-1 -left-1 flex h-3 w-3">
