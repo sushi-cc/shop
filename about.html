@@ -62,9 +62,10 @@
     </main>
 
     <footer class="bg-white py-10 text-center opacity-60 text-[10px] tracking-widest">
-        © 2026 蟹老闆 SUSHI | 生鮮團購 FRESH FOOD
+        © 2026 安織生鮮 | 生鮮團購 FRESH FOOD
     </footer>
 
+    <!-- 購物車底部固定條 -->
     <div id="cart-footer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-md bg-[#1a3a5a] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 hidden fade-in">
         <div onclick="toggleCartModal()" class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity">
             <div class="relative">
@@ -82,6 +83,7 @@
         </button>
     </div>
 
+    <!-- 購物車彈出視窗 -->
     <div id="cart-modal" class="fixed inset-0 z-[70] hidden">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleCartModal()"></div>
         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-3xl p-6 shadow-2xl transition-transform duration-300">
@@ -241,7 +243,7 @@
             return `${dateStr}${String(sequence).padStart(4, '0')}`;
         }
 
-        // 🚀 核心修正：乾淨流暢的「文字自動匯入訊息框」機制
+        // 🚀 執行 5/14 還原測試語法
         function sendToLine() {
             if (cart.length === 0) {
                 alert("您的購物車還是空的喔！");
@@ -250,7 +252,6 @@
 
             const orderNo = generateOrderNo();
             
-            // 1. 組合訊息內容
             let message = `🔖 訂單編號：${orderNo}\n`;
             message += "【生鮮團購｜訂購內容】\n---\n";
             
@@ -260,12 +261,12 @@
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n`;
-            message += `請將此訊息傳送給：蟹老闆生鮮團購 (GBianRB4XH)`; 
+            message += `請將此訊息傳送給：安織生鮮 (GBianRB4XH)`; 
 
-            // 2. 使用文字分享連結 (這是個人 ID 匯入文字最穩定的發送方式)
-            const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+            // 💡 嘗試變體一：直接用個人好友連結加上問號帶入文字
+            const lineUrl = `https://line.me/ti/p/GBianRB4XH?text=${encodeURIComponent(message)}`;
 
-            // 3. 執行虛擬連結點擊跳轉法，確保手機瀏覽器完美相容
+            // 執行虛擬點擊跳轉
             const tempLink = document.createElement('a');
             tempLink.href = lineUrl;
             tempLink.style.display = 'none';
