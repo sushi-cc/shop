@@ -274,15 +274,36 @@
             const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
             message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝!`;
             
-            // 💡 針對私人好友加好友網址（ti/p/）的特殊嚴格字元編碼轉換
-            // 私人加好友網址不支援 %0A 換行，必須使用 %20 或特殊處理，在此進行標準最優化編碼
-            const encodedMsg = encodeURIComponent(message);
-            
-            // 串接至你的私人 LINE 聊天室代碼
-            const lineUrl = `https://line.me/R/ti/p/GBianRB4XH?text=${encodedMsg}`;
-            
-            // 執行直接重定向跳轉
-            window.location.href = lineUrl;
+            // 🚀 方案B核心安全複製機制
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(message).then(() => {
+                    alert("🛒 訂單明細已自動複製成功！\n進入 LINE 聊天室後，直接在訊息框「長按貼上」即可送出訂單。");
+                    window.location.href = "https://line.me/ti/p/GBianRB4XH";
+                }).catch(() => {
+                    // 備用防線：如果瀏覽器不支援新版複製 API，使用舊版傳統複製法
+                    fallbackCopyAndRedirect(message);
+                });
+            } else {
+                fallbackCopyAndRedirect(message);
+            }
+        }
+
+        // 舊型瀏覽器相容性複製與跳轉函數
+        function fallbackCopyAndRedirect(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed"; 
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert("🛒 訂單明細已自動複製成功！\n進入 LINE 聊天室後，直接在訊息框「長按貼上」即可送出訂單。");
+            } catch (err) {
+                alert("即將前往 LINE，請記得複製您的訂單明細唷！");
+            }
+            document.body.removeChild(textArea);
+            window.location.href = "https://line.me/ti/p/GBianRB4XH";
         }
 
         fetchProducts();
