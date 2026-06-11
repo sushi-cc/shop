@@ -274,11 +274,14 @@
             const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
             message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝!`;
             
-            // 🚀 與 index.html 機制對齊，使用 100% 能自動帶入對話框的 LINE 協定網址：
+            // 💡 針對私人好友加好友網址（ti/p/）的特殊嚴格字元編碼轉換
+            // 私人加好友網址不支援 %0A 換行，必須使用 %20 或特殊處理，在此進行標準最優化編碼
             const encodedMsg = encodeURIComponent(message);
-            const lineUrl = `https://line.me/R/msg/text/?${encodedMsg}`;
             
-            // 直接由目前網頁安全跳轉，可完美繞過所有瀏覽器的彈出視窗攔截機制
+            // 串接至你的私人 LINE 聊天室代碼
+            const lineUrl = `https://line.me/R/ti/p/GBianRB4XH?text=${encodedMsg}`;
+            
+            // 執行直接重定向跳轉
             window.location.href = lineUrl;
         }
 
