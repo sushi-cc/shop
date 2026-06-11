@@ -243,7 +243,7 @@
             return `${dateStr}${String(sequence).padStart(4, '0')}`;
         }
 
-        // 🚀 執行 5/14 還原測試語法
+
         function sendToLine() {
             if (cart.length === 0) {
                 alert("您的購物車還是空的喔！");
@@ -261,7 +261,7 @@
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n`;
-            message += `請將此訊息傳送給：安織生鮮 (GBianRB4XH)`; 
+            message += `請幫我確定商品訂單，謝謝!`; 
 
             // 💡 嘗試變體一：直接用個人好友連結加上問號帶入文字
             const lineUrl = `https://line.me/ti/p/GBianRB4XH?text=${encodeURIComponent(message)}`;
