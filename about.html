@@ -261,14 +261,14 @@
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n`;
             
-            // 💡 提示引導文字：你可以把下面的「小安（安織生鮮）」改成你在 LINE 上的真實暱稱！
-            message += `👉 請在上方搜尋並勾選：「小安（安織生鮮）」傳送訂單！`; 
+            // 💡 提示引導文字：你可以把下面的「生鮮」改成你在 LINE 上的真實暱稱！
+            message += `👉 請在上方搜尋並勾選：「生鮮」傳送訂單！`; 
 
             // 2. 轉換為文字分享連結 
             const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
 
             // 3. 提示客戶並透過虛擬連結點擊跳轉，確保手機相容性
-            alert("訂單已建立！進入 LINE 分享畫面後，請勾選「老闆的頭像」並按下傳送即可送出訂單唷！");
+            alert("訂單已建立！進入 LINE 分享畫面後，請點選「啊桂的頭像」並按下傳送即可送出訂單唷！");
             
             const tempLink = document.createElement('a');
             tempLink.href = lineUrl;
