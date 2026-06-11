@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://i.postimg.cc/v8z6rRVj/S-443310086.jpg">
+    <link class="flex" rel="icon" href="https://i.postimg.cc/v8z6rRVj/S-443310086.jpg">
     <title>生鮮團購｜職人嚴選</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -274,34 +274,11 @@
             const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
             message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝!`;
             
-            // 雙重保險核心機制：
-            // 1. 先將完整的訂單文字複製到使用者的剪貼簿中，萬一訊息欄為空，直接按「貼上」即可
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(message).then(() => {
-                    alert("🛒 訂單明細已自動複製到剪貼簿！\n跳轉至 LINE 後若文字欄為空，請直接在對話框「貼上」即可發送。");
-                    executeLineRedirect(message);
-                }).catch(() => {
-                    executeLineRedirect(message);
-                });
-            } else {
-                executeLineRedirect(message);
-            }
-        }
-
-        function executeLineRedirect(message) {
-            // 2. 這是最有效能將文字強行帶入 LINE 的格式
-            const lineShareUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+            // 💡 直接跳轉指定 LINE 聊天室，並強制填入訊息欄
+            const targetLineUrl = `https://line.me/ti/p/GBianRB4XH?text=${encodeURIComponent(message)}`;
             
-            // 3. 同時建立你指定的專屬好友連結
-            const chatRoomUrl = "https://line.me/ti/p/GBianRB4XH";
-            
-            // 先嘗試用官方分享機制把文字送出去（這通常會直接打開 LINE 的選擇好友或指定對話框）
-            window.open(lineShareUrl, '_blank');
-            
-            // 短暫延遲後，確保聊天室導向也能運作
-            setTimeout(() => {
-                window.open(chatRoomUrl, '_blank');
-            }, 500);
+            // 開啟視窗
+            window.open(targetLineUrl, '_blank');
         }
 
         fetchProducts();
