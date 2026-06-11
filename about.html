@@ -101,7 +101,7 @@
     <script>
         const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTITgLIl15r_SWgqFL4DihsAMIsMqOrZZD6l6GLgXC9orSXQEm-Dh5kHlp1Ee8ZA6FHlMUA1HCUjGII/pub?output=csv";
         let cart = [];
-        let allProducts = []; // 全域產品清單
+        let allProducts = []; 
 
         async function fetchProducts() {
             try {
@@ -117,7 +117,6 @@
                         img: cols[2] ? cols[2].trim() : "",
                         spec: cols[3] ? cols[3].trim() : "",
                         about: cols[4] ? cols[4].trim() : "",
-                        // 處理階梯價格 (第6欄)
                         tieredPrices: cols[5] ? cols[5].trim().split('|').map(p => parseInt(p)) : []
                     };
                 });
@@ -127,7 +126,6 @@
             }
         }
 
-        // 核心邏輯：計算階梯價格
         function calculateCurrentPrice(product, quantity) {
             if (quantity === 0) return 0;
             if (product.tieredPrices && product.tieredPrices.length > 0) {
@@ -276,12 +274,34 @@
             const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
             message += `---\n💰 總計金額：NT$ ${total.toLocaleString()}\n\n請協助確認內容，謝謝!`;
             
-            // 安全跳轉：結合您指定的 LINE 連結與編碼後的文字訊息欄參數
-            const baseUrl = "https://line.me/ti/p/GBianRB4XH";
-            const lineUrl = `${baseUrl}?text=${encodeURIComponent(message)}`;
+            // 雙重保險核心機制：
+            // 1. 先將完整的訂單文字複製到使用者的剪貼簿中，萬一訊息欄為空，直接按「貼上」即可
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(message).then(() => {
+                    alert("🛒 訂單明細已自動複製到剪貼簿！\n跳轉至 LINE 後若文字欄為空，請直接在對話框「貼上」即可發送。");
+                    executeLineRedirect(message);
+                }).catch(() => {
+                    executeLineRedirect(message);
+                });
+            } else {
+                executeLineRedirect(message);
+            }
+        }
+
+        function executeLineRedirect(message) {
+            // 2. 這是最有效能將文字強行帶入 LINE 的格式
+            const lineShareUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
             
-            // 使用新視窗開啟，避免被行動裝置的瀏覽器安全機制攔截
-            window.open(lineUrl, '_blank');
+            // 3. 同時建立你指定的專屬好友連結
+            const chatRoomUrl = "https://line.me/ti/p/GBianRB4XH";
+            
+            // 先嘗試用官方分享機制把文字送出去（這通常會直接打開 LINE 的選擇好友或指定對話框）
+            window.open(lineShareUrl, '_blank');
+            
+            // 短暫延遲後，確保聊天室導向也能運作
+            setTimeout(() => {
+                window.open(chatRoomUrl, '_blank');
+            }, 500);
         }
 
         fetchProducts();
